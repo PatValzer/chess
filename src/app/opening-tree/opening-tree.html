@@ -1,0 +1,27 @@
+<mat-tree #tree [dataSource]="openings()" class="mt-0" [childrenAccessor]="childrenAccessor">
+    <!-- type of node is OpeningTreeNode-->
+    <mat-tree-node *matTreeNodeDef="let node;" matTreeNodeToggle matTreeNodePadding
+        [cdkTreeNodeTypeaheadLabel]="node.name" class="h-auto !min-h-[30px] border-b-2"
+        [isExpanded]="true" 
+        [class.selectedOpening]="node.isInTree()">
+        <button matIconButton matTreeNodeToggle class="!size-[28px] !p-0">
+            @if(hasChild(node)){
+            <mat-icon class="mat-icon-rtl-mirror ">
+                {{tree.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+            }
+        </button>
+        <strong class="text-[10px] min-w-[30px] w-auto cursor-pointer"
+            (click)="showOpeningDetails(node); $event.stopPropagation()">
+            {{
+            openingService.selectedOpeningTree().length == 0 || openingService.selectedOpeningTree()[0].pgn() !=
+            node.pgn() ?
+            node.pgnToDisplay : node.pgn() }}</strong>
+        @if(node.displayDescription()){
+        <span class="italic pl-2 text-[10px]"
+            (click)="showOpeningDetails(node); $event.stopPropagation()">{{node.mainLine.name}}
+        </span>
+        }
+        <span class="pl-2 text-[10px]"> ({{node.openingsAtLevel.length}})</span>
+    </mat-tree-node>
+</mat-tree> 

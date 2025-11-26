@@ -1,0 +1,100 @@
+.wpb-container {
+    width: 100%;
+    max-width: 720px;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #222;
+}
+
+.label-center {
+    flex: 0 0 auto;
+    margin: 0 8px;
+    font-weight: 600;
+}
+
+.bar {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #e9eef2;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.segment {
+    height: 100%;
+    float: left;
+    transition: width 600ms cubic-bezier(.2, .9, .2, 1);
+}
+
+.white-seg {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 250, 240, 0.95));
+}
+
+.draw-seg {
+    background: repeating-linear-gradient(45deg, rgba(200, 200, 200, 0.65) 0 6px, rgba(220, 220, 220, 0.65) 6px 12px);
+}
+
+.black-seg {
+    background: linear-gradient(90deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.9));
+}
+
+.bar-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    padding: 0 6px;
+}
+
+.bar-label {
+    font-size: 12px;
+}
+
+.bar-label.center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bar-label.left {
+    text-align: left;
+}
+
+.bar-label.right {
+    text-align: right;
+}
+
+.legend {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #444;
+}
+
+@media (max-width:420px) {
+    .bar {
+        height: 22px;
+    }
+
+    .labels {
+        font-size: 12px
+    }
+}
+
+.bar-common {
+  @apply size-6 rounded-full bg-white p-1 border border-[rgba(0,0,0,0.75)] text-[10px];
+}
+

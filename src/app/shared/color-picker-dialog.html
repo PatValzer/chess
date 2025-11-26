@@ -1,0 +1,18 @@
+<div class="color-picker-dialog">
+  <h3 mat-dialog-title>{{data.title}}</h3>
+  <div mat-dialog-content>
+    <div class="palette">
+      @for(color of palette; track $index) {
+      <button type="button" class="swatch" [style.backgroundColor]="color" (click)="select(color)"
+        [class.selected]="color === current">
+      </button>
+      }
+    </div>
+    custom color: <input  class="size-16" matInput type="color" id="color" name="color" [(ngModel)]="current" (change)="select(current)">
+
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+  </div>
+</div>

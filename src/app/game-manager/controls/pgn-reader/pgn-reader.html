@@ -1,0 +1,4 @@
+<div class="pngText">
+    <textarea [value]="pgnService.pgnText()" (input)="pgnService.pgnText.set($any($event.target).value)"
+        [style.background]="pgnService.validPgn() ? '#00800038' : '#ff0000a1'"></textarea>
+</div>

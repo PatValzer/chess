@@ -1,0 +1,36 @@
+:host ::ng-deep .chessBoard {
+    grid-template-columns: 10px auto auto auto auto auto auto auto auto;
+    @apply w-[800px];
+
+    .cell {
+        @apply size-[100px];
+
+        .piece {
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            font-family: ChessMeridaUnicode;
+            font-size: 75px !important;
+            @apply leading-[50px] pt-[25px];
+        }
+
+        .selectedPiece {
+            font-size: 100px;
+        }
+    }
+
+}
+
+:host ::ng-deep .chessBoard-small {
+    grid-template-columns: 15px auto auto auto auto auto auto auto auto;
+    @apply w-[320px];
+
+    .cell {
+        @apply size-[40px];
+        font-size: 12px;
+
+        .piece {
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            font-family: ChessMeridaUnicode;
+            @apply leading-[20px] pt-[10px] !text-[23px];
+        }
+    }
+}

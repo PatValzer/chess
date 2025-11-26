@@ -1,0 +1,21 @@
+<div class="grid  grid-cols-[20px_auto] gap-4">
+    <div class="rounded-full">
+        <app-win-probability-bar [verticalBar]="true" [positionAnalysis]="positionAnalysis()" [showInnerLabels]="false"
+            [showLabels]="false" class="w-full h-[400px] block " />
+    </div>
+    <div>whiteWinProbability: {{stockfish.result().whiteWinProbability}}
+        <br>
+        blackWinProbability: {{stockfish.result().blackWinProbability}}
+        <br>
+        drawProbability: {{stockfish.result().drawProbability }}
+        <br>
+        cp: {{stockfish.result().cp}}
+        <br>
+        bestMove: {{stockfish.result().bestMove()}}
+        <br>
+        @if(stockfish.result().mate != 0) {
+        mate in: {{stockfish.result().mate}} moves
+        <br>
+        }
+    </div>
+</div>

@@ -1,0 +1,10 @@
+:host ::ng-deep .mat-mdc-button-touch-target{
+    
+    @apply size-[25px] !important
+}
+
+.selectedOpening{
+    // color: red;
+    font-weight: bold;
+    background-color:rgb(0 0 0 / 3%)
+}

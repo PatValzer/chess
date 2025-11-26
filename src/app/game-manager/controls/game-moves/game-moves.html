@@ -1,0 +1,18 @@
+<div class="text-[10px] max-w-[320px] m-auto overflow-hidden" [class.float-right]="!horizontal()"
+    [class.leading-[20px]]="!horizontal()" [class.min-h-[400px]]="!horizontal()">
+    <div class="grid mt-3 mr-1" [class.min-w-[170px]]="!horizontal()" [class.grid-cols-[30px_auto_auto]]="!horizontal()"
+        [class.grid-cols-[repeat(auto-fit,minmax(0,35px))]]="horizontal()">
+        @for (item of gameManagerService.moves(); track $index) {
+        @if($index % 2 == 0){
+        <div class="text-right text-black font-bold">{{($index / 2) + 1}}.</div>
+        }
+        <div>
+            <button mat-button [class.currentMove]="gameManagerService.currentMoveIndex() - 1 == $index"
+                [class.!min-w-4]="horizontal()" [class.!min-w-[50px]]="!horizontal()"
+                [style.color]="gameManagerService.currentMoveIndex() > $index ? 'grey' : 'lightgrey'"
+                class="!text-[clamp(5px,5vw,10px)] !h-[20px] w-auto !p-1"
+                (click)="gameManagerService.goToMove($index)">{{item.san}}</button>
+        </div>
+        }
+    </div>
+</div>

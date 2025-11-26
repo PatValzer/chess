@@ -1,0 +1,27 @@
+<div class="m-auto grid" [class.chessBoard]="cellSize() == 'b'" [class.chessBoard-small]="cellSize() == 's'" cdkDropListGroup>
+    @for (row of chessboardService.cells; track row) {
+    @for (cell of row; track $index) {
+    <!-- optional row labels -->
+    @if ($index % 8 == 0) {
+    <div [class.leading-[40px]]="cellSize() == 's'"  [class.leading-[100px]]="cellSize() != 's'" class="mr-5">
+        {{ cell().coordinates.row }}
+    </div>
+    }
+    <!-- draggable piece -->
+    <app-cell cdkDropList [id]="'cell-' + cell().coordinates.toString()" [cdkDropListData]="cell()"
+        [cdkDropListConnectedTo]="allDropListIds()" (cdkDropListDropped)="drop($event)" [cell]="cell()"
+        class="cell ![scroll-snap-type:both_mandatory]"
+        [style.--size]="cellSize() == 'b' ? '100px' : '20px'"></app-cell>
+
+    }
+    }
+
+    <!-- column labels -->
+    <div class="text-center text-[15px] cell">
+    </div>
+    @for (column of chessboardService.columns; track $index) {
+    <div class="text-center text-[15px]">
+        {{ column }}
+    </div>
+    }
+</div>

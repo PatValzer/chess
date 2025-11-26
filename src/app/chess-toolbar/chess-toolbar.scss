@@ -1,0 +1,107 @@
+:host {
+    display: block;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: var(--toolbar-bg, rgba(0, 0, 0, 0.04));
+    box-shadow: var(--toolbar-shadow, 0 1px 2px rgba(0, 0, 0, 0.04));
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.left-group,
+.right-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center
+}
+
+.center-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center
+}
+
+.btn {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.4rem;
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed
+}
+
+.btn.small {
+    padding: 0.25rem 0.4rem;
+    font-size: 0.85rem
+}
+
+.btn:hover {
+    background: var(--toolbar-hover, rgba(0, 0, 0, 0.03))
+}
+
+.clock-toggle,
+.movelist-toggle {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center
+}
+
+.import-fen {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center
+}
+
+.fen-input {
+    min-width: 220px;
+    padding: 0.35rem;
+    border-radius: 0.35rem;
+    border: 1px solid rgba(0, 0, 0, 0.08)
+}
+
+.settings-dropdown {
+    position: relative
+}
+
+.dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.25rem;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08)
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.4rem 0.8rem;
+    width: 100%;
+    text-align: left;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.03)
+}
+.menu-voice{
+    @apply w-full text-left px-3 py-2 text-sm hover:bg-gray-100 bg-[--toolbar-bg];
+}

@@ -1,0 +1,52 @@
+<div class="wpb-container h-full" role="group" aria-label="Win probability">
+    @if(showLabels()){
+    <div class="labels">
+        <span class="label-left">White {{ formatPercent(positionAnalysis().whiteWinProbability) }}</span>
+        @if(showEval){
+        <span class="label-center">Eval: {{ evalDisplay }}</span>
+        }
+        <span class="label-right">Black {{ formatPercent(positionAnalysis().blackWinProbability) }}</span>
+    </div>
+    }
+
+
+    @if(verticalBar()){
+    <div class="h-full">
+        <div [style.backgroundColor]="chessboardService.whitePieceColor()" class="rounded-t-full"
+            [style.height.%]="positionAnalysis().whiteWinProbability*100"></div>
+        <div [style.height.%]="positionAnalysis().drawProbability*100"></div>
+        <div [style.backgroundColor]="chessboardService.blackPieceColor()" class="rounded-b-full"
+            [style.height.%]="positionAnalysis().blackWinProbability*100"></div>
+    </div>
+    }
+    @else {
+    <div class="bar" matTooltip="{{tooltip}}" matTooltipClass="custom-tooltip" [style.height.px]="height()">
+        <div class="segment" [style.backgroundColor]="chessboardService.whitePieceColor()"
+            [style.width.%]="positionAnalysis().whiteWinProbability*100"></div>
+        <div class="segment draw-seg" [style.width.%]="positionAnalysis().drawProbability*100"></div>
+        <div class="segment" [style.backgroundColor]="chessboardService.blackPieceColor()"
+            [style.width.%]="positionAnalysis().blackWinProbability*100"></div>
+        <div class="bar-overlay ">
+            @if( showInnerLabels()){
+            <div class="left bar-common ">{{
+                shortPercent(positionAnalysis().whiteWinProbability) }}</div>
+            <div class="center bar-common">{{
+                shortPercent(positionAnalysis().drawProbability)
+                }}</div>
+            <div class="right bar-common">{{
+                shortPercent(positionAnalysis().blackWinProbability) }}
+            </div>
+            }
+        </div>
+    </div>
+    }
+
+    @if(showLegend()){
+    <div class="legend">
+        <span>White win</span>
+        <span>Draw</span>
+        <span>Black win</span>
+    </div>
+    }
+
+</div>

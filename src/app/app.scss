@@ -1,0 +1,8 @@
+.container {
+    @apply m-auto mt-2 rounded-xl bg-gray-200 p-3 max-w-[90%] grid [grid-template-columns:auto_auto_auto] gap-4;
+
+}
+
+.toolbar{
+    @apply w-full italic text-right col-span-3;
+}

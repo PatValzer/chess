@@ -1,0 +1,33 @@
+<div class="mt-3 h-[400px]">
+    <app-win-probability-bar 
+        [positionAnalysis]="display()" 
+        class="block h-[30px]"
+    ></app-win-probability-bar>
+
+    @for (move of gameExplorer()?.moves ?? []; track $index) {
+        <div class="nextMove grid mt-[5px]">
+            <div>
+                @let opening = move.opening;
+                @if (opening) {                    
+                    <button mat-button class="!h-[20px]" matTooltip="{{opening.name}}" (click)="showOpeningDetails(opening)">
+                        <mat-icon fontIcon="book"></mat-icon>
+                    </button> 
+                }
+            </div>
+
+            <button mat-button 
+                    (click)="doMove(move)" 
+                    style="height: 20px; font-size: 13px;">
+                {{ move.san }}
+            </button>
+
+            <app-win-probability-bar 
+                [positionAnalysis]="getPositionAnalysis(move)"
+                [showInnerLabels]="false"
+                [showLabels]="false"
+                [showLegend]="false"
+                [height]="20">
+            </app-win-probability-bar>
+        </div>
+    }
+</div>

@@ -1,0 +1,37 @@
+<div class="grid h-[800px] grid-cols-[406px] float-right grid-rows-[auto_auto_465px_auto_auto_auto]">
+    <app-eaten-pieces color="b"></app-eaten-pieces>
+
+    <countdown #bcd [class.font-bold]="gameManagerService.currentTurn() == 'b'" [render]="countdownTpl"
+        [config]="config" class="countdown" />
+
+    <div>
+        <mat-tab-group class="!h-[465px]" mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab label="Pgn">
+                @if (gameManagerService.moves().length > 0) {
+                <app-game-moves />
+                }
+            </mat-tab>
+            <mat-tab label="Games explorer">
+                <app-games-library />
+            </mat-tab>
+            <mat-tab label="Analysis">
+                <app-game-analysis />
+            </mat-tab>
+            <mat-tab label="Load Game">
+                <app-pgn-reader />
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+    <app-game-navigator />
+    <countdown #wcd mat-label [class.font-bold]="gameManagerService.currentTurn() == 'w'" [render]="countdownTpl"
+        [config]="config" />
+
+    <app-eaten-pieces color="w" />
+
+    <ng-template #countdownTpl let-data>
+        <div class="text-right text-[35px]">
+            ⏱ {{data.text}}
+        </div>
+    </ng-template>
+</div>

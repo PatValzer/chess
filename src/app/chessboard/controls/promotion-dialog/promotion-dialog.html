@@ -1,0 +1,8 @@
+<div class="color-picker-dialog">
+    <h3 mat-dialog-title>{{data.title}}</h3>
+    <div mat-dialog-content>
+        @for (item of pieces; track $index) {
+        <app-piece [selected]="false" [piece]="item" class="inline-block" (click)="closeDialog(item)"></app-piece>
+        }
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="text-center font-size-2">
+    <button mat-button (click)="gameManagerService.goToMove(-1)" [disabled]="gameManagerService.currentMoveIndex() <= 1">
+        <mat-icon fontSet="material-symbols-outlined">fast_rewind</mat-icon></button>
+    <button mat-button (click)="gameManagerService.prevMove()" [disabled]="gameManagerService.currentMoveIndex() <= 0">
+        <mat-icon fontIcon="undo"></mat-icon></button>
+
+    <input matInput type="number" [value]="gameManagerService.chess.moveNumber()"
+        class="text-center w-[100px] !h-[20px] rounded p-3" />
+
+    <button mat-button (click)=" gameManagerService.nextMove()"
+        [disabled]="gameManagerService.currentMoveIndex() >= gameManagerService.moves().length">
+        <mat-icon fontIcon="redo"></mat-icon></button>
+
+    <button mat-button (click)="gameManagerService.goToMove(gameManagerService.moves().length -1)"
+        [disabled]="gameManagerService.currentMoveIndex() >= gameManagerService.moves().length">
+        <mat-icon fontSet="material-symbols-outlined">fast_forward</mat-icon></button>
+</div>

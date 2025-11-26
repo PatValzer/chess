@@ -1,0 +1,13 @@
+<div style="width: calc(100% - 1px); height: calc(100% - 1px);" (click)="cellClick($event)"
+    [style.boxShadow]="boxShadow()" [style.--cell-color]="cell().displayColor | cellColorPipe : opacity()"
+    class="bg-[var(--cell-color)] overflow-hidden">
+
+    @if ( cell().piece() != null ) {
+
+    <app-piece [piece]="cell().piece()!!" [selected]="selected()" cdkDrag [cdkDragData]="cell()"
+        [cdkDragDisabled]="chessboardService.selectedPieceSquare() != null" (cdkDragStarted)="onDragStart($event)"
+        class="h-full overflow-hidden text-[75px]">
+    </app-piece>
+    }
+
+</div>
