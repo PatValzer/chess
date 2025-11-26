@@ -25,6 +25,7 @@ export class OpenAIService {
     if (this.apiKey() == '') {
       throw new Error("OpenAI API key is not set.");
     }
+    console.log("Using API Key: ", this.apiKey());
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.apiKey()}`,
