@@ -80,7 +80,8 @@ export class StockfishService {
   currentTurn = signal<COLORS>('w');
 
   constructor() {
-    this.engine = new Worker('assets/stockfish/src/stockfish-17.1-8e4d048.js', { type: 'module' });
+    // this.engine = new Worker('assets/stockfish/src/stockfish-17.1-8e4d048.js', { type: 'module' });
+    this.engine = new Worker('assets/stockfish/src/stockfish-17.1-lite-single-03e3232.js', { type: 'module' });   
     //single thread for now
     this.engine.postMessage('Threads 1');
     this.engine.onmessage = this.stockfishMessageHandler;
