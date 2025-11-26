@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class OpenAIService {
   //private apiUrl = 'https://api.openai.com/v1/chat/completions';
   private apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
-  apiKey: WritableSignal<string> = signal('')
+  apiKey: WritableSignal<string> = signal('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')
 
   private inizializeMessage = "I'm going to give you a pgn sequence of chess moves representing an opening. " +
     " I want you to explain me that opening, focusing on which one are the main tactical tricks." +
