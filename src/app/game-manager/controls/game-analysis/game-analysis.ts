@@ -1,5 +1,5 @@
 import { Component, computed, effect, inject, Signal } from '@angular/core';
-import { StockfishService } from '../../../engine/stockfish';
+import { StockfishService } from '../../../services/stockfish-service';
 
 import { PositionAnalysis, WinProbabilityBar } from "../win-probability-bar/win-probability-bar";
 import { GameManagerService } from '../../../services/game-manager-service';

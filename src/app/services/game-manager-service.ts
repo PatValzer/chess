@@ -3,7 +3,7 @@ import { computed, effect, inject, Injectable, signal, untracked } from '@angula
 import { Chess, Move } from 'chess.js';
 import { ChessboardService } from './chessboard.service';
 import { COLORS } from '../chessboard/COLORS';
-import { StockfishService } from '../engine/stockfish';
+import { StockfishService } from './stockfish-service';
 import { OpeningService } from './opening-service';
 import { Square } from '../chessboard/models/Square';
 import { Piece } from '../chessboard/models/Piece';
