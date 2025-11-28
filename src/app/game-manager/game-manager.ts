@@ -10,21 +10,23 @@ import { GameNavigator as GameNavigatorComponent } from "./controls/game-navigat
 import { GameAnalysis as GameAnalysisComponent } from "./controls/game-analysis/game-analysis";
 
 import { OpeningService } from '../services/opening-service';
+import { BreakpointService } from '../services/breakpoint-service';
+import { CountdownService } from '../services/countdown-service';
+import { CountDown } from "./controls/count-down/count-down";
 
 @Component({
   selector: 'app-game-manager',
   imports: [
-    
     EatenPiecesComponent,
     PgnReaderComponent,
     GameMovesComponent,
     GamesLibraryComponent,
     GameNavigatorComponent,
     GameAnalysisComponent,
-
     CountdownModule,
-    MatTabsModule
-  ],
+    MatTabsModule,
+    CountDown
+],
   templateUrl: './game-manager.html',
   styleUrl: './game-manager.scss'
 })
@@ -33,12 +35,13 @@ export class GameManager {
 
   resetGame = input.required<number>()
 
-  @ViewChild('wcd', { static: false }) private whiteCountdown!: CountdownComponent;
-  @ViewChild('bcd', { static: false }) private blackCountdown!: CountdownComponent;
+  @ViewChild('wcd') private whiteCountdown!: CountdownComponent;
+  @ViewChild('bcd') private blackCountdown!: CountdownComponent;
 
   showPgn: boolean = false;
   config: CountdownConfig = { leftTime: 300, demand: true };
-
+  
+  breakpointService = inject(BreakpointService)
   gameManagerService = inject(GameManagerService)
   openingService = inject(OpeningService)
 

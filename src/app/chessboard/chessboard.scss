@@ -1,15 +1,15 @@
+
+
 :host ::ng-deep .chessBoard {
-    grid-template-columns: 10px auto auto auto auto auto auto auto auto;
-    @apply w-[800px];
+    grid-template-columns: 4% 12% 12% 12% 12% 12% 12% 12% 12%;
+    @apply  w-[100%];
 
     .cell {
-        @apply size-[100px];
+       
 
         .piece {
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             font-family: ChessMeridaUnicode;
-            font-size: 75px !important;
-            @apply leading-[50px] pt-[25px];
         }
 
         .selectedPiece {
@@ -19,18 +19,18 @@
 
 }
 
-:host ::ng-deep .chessBoard-small {
-    grid-template-columns: 15px auto auto auto auto auto auto auto auto;
-    @apply w-[320px];
+// :host ::ng-deep .chessBoard-small {
+//     grid-template-columns: 4% 12% 12% 12% 12% 12% 12% 12% 12%;
+//     @apply w-[100%]; ;
 
-    .cell {
-        @apply size-[40px];
-        font-size: 12px;
+//     .cell {
+//         @apply size-[40px];
+//         font-size: 12px;
 
-        .piece {
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            font-family: ChessMeridaUnicode;
-            @apply leading-[20px] pt-[10px] !text-[23px];
-        }
-    }
-}
+//         .piece {
+//             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+//             font-family: ChessMeridaUnicode;
+//             @apply leading-[20px] pt-[10px] !text-[23px];
+//         }
+//     }
+// }

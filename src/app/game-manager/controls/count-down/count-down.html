@@ -1,0 +1,10 @@
+<!-- <div>
+    <button (click)="start()">Start</button>
+    <button (click)="switch()">Switch Turn</button>
+    <button (click)="stop()">Stop</button>
+    <button (click)="reset()">Reset</button>
+</div> -->
+
+<div class="text-right text-[35px]" [class.font-bold]="gameManagerService.currentTurn() == countDownColor()">
+    ⏱ {{countDownColor() == 'w' ? whiteTimeFormatted() : blackTimeFormatted()}}
+</div>

@@ -1,11 +1,23 @@
-<div class="grid h-[800px] grid-cols-[406px] float-right grid-rows-[auto_auto_465px_auto_auto_auto]">
-    <app-eaten-pieces color="b"></app-eaten-pieces>
-
-    <countdown #bcd [class.font-bold]="gameManagerService.currentTurn() == 'b'" [render]="countdownTpl"
-        [config]="config" class="countdown" />
-
+@if(breakpointService.isMobile()){
+<div class="grid">
     <div>
-        <mat-tab-group class="!h-[465px]" mat-stretch-tabs="false" mat-align-tabs="start">
+        <countdown #bcd [render]="countdownTpl" [config]="config" class="font-bold" />
+        <app-eaten-pieces [color]="gameManagerService.currentTurn()"></app-eaten-pieces>
+    </div>
+    <app-game-moves [horizontal]="true" />
+</div>
+}
+@else {
+<div class="grid h-[800px] grid-cols-1 float-right grid-rows-[auto_465px_auto_auto]">
+    <div>
+        @let color = 'b';
+        <app-eaten-pieces [color]="color"></app-eaten-pieces>
+        <app-count-down [countDownColor]="color"></app-count-down>
+        <countdown #bcd [class.font-bold]="gameManagerService.currentTurn() == color" [render]="countdownTpl"
+            [config]="config" class="countdown" />
+    </div>
+    <div>
+        <mat-tab-group class="!h-full" mat-stretch-tabs="false" mat-align-tabs="start">
             <mat-tab label="Pgn">
                 @if (gameManagerService.moves().length > 0) {
                 <app-game-moves />
@@ -24,14 +36,17 @@
     </div>
 
     <app-game-navigator />
-    <countdown #wcd mat-label [class.font-bold]="gameManagerService.currentTurn() == 'w'" [render]="countdownTpl"
-        [config]="config" />
-
-    <app-eaten-pieces color="w" />
-
-    <ng-template #countdownTpl let-data>
-        <div class="text-right text-[35px]">
-            ⏱ {{data.text}}
-        </div>
-    </ng-template>
+    <div>
+        <app-count-down [countDownColor]="'w'"></app-count-down>
+        <countdown #wcd mat-label [class.font-bold]="gameManagerService.currentTurn() == 'w'" [render]="countdownTpl"
+            [config]="config" />
+        <app-eaten-pieces color="w" />
+    </div>
 </div>
+}
+
+<ng-template #countdownTpl let-data>
+    <div class="text-right text-[35px]">
+        ⏱ {{data.text}}
+    </div>
+</ng-template>

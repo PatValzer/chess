@@ -11,6 +11,7 @@ import { PromotionDialog } from '../chessboard/controls/promotion-dialog/promoti
 import { PopupDialogService } from './popup-dialog-service';
 import { NextMove } from '../game-manager/controls/games-library/games-library';
 import { Opening } from '../game-manager/models/Opening';
+import { CountdownService } from './countdown-service';
 
 
 @Injectable({
@@ -26,7 +27,7 @@ export class GameManagerService {
   private chessboardService = inject(ChessboardService)
   private openingService = inject(OpeningService)
   private popupDialogService = inject(PopupDialogService)
-
+  private countDownService = inject(CountdownService)
 
   // Tracks the current move index for navigation
   currentMoveIndex = signal(0);
@@ -204,6 +205,7 @@ export class GameManagerService {
     this.moves.set([]);
     this.currentMoveIndex.set(0);
     this.openingService.currentOpening.update(s => null)
+    this.countDownService.reset();
     // this.co
   }
 

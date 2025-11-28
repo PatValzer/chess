@@ -1,4 +1,4 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -16,10 +16,8 @@ export class OpenAIService {
     + " don't add html and body tags give me back just a div fragment to reuse. "
     + " all css inline."
 
-  constructor(private http: HttpClient) {
-  }
 
-
+  http = inject(HttpClient);
 
   chat(message: string): Observable<any> {
     if (this.apiKey() == '') {

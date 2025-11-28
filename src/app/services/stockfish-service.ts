@@ -23,7 +23,6 @@ export class StockfishService {
   });
 
   private stockfishMessageHandler = (message: any) => {
-    console.log("Stockfish message:", message);
     const line = message.data as string
 
     if (line.startsWith('info depth')) {

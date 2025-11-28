@@ -1,17 +1,16 @@
-<div class="m-auto grid" [class.chessBoard]="cellSize() == 'b'" [class.chessBoard-small]="cellSize() == 's'" cdkDropListGroup>
+<div class="m-auto grid max-w-[100%]" [class.chessBoard]="cellSize() == 'b' || true" cdkDropListGroup>
     @for (row of chessboardService.cells; track row) {
     @for (cell of row; track $index) {
     <!-- optional row labels -->
     @if ($index % 8 == 0) {
-    <div [class.leading-[40px]]="cellSize() == 's'"  [class.leading-[100px]]="cellSize() != 's'" class="mr-5">
+    <div  class="mr-5 flex items-center">
         {{ cell().coordinates.row }}
     </div>
     }
     <!-- draggable piece -->
     <app-cell cdkDropList [id]="'cell-' + cell().coordinates.toString()" [cdkDropListData]="cell()"
         [cdkDropListConnectedTo]="allDropListIds()" (cdkDropListDropped)="drop($event)" [cell]="cell()"
-        class="cell ![scroll-snap-type:both_mandatory]"
-        [style.--size]="cellSize() == 'b' ? '100px' : '20px'"></app-cell>
+        class="cell ![scroll-snap-type:both_mandatory]"></app-cell>
 
     }
     }
