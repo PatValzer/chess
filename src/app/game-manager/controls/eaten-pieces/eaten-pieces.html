@@ -1,6 +1,9 @@
-<div class="min-h-[100px] rounded break-words" [style.background]="color() | cellColorPipe"
+<div class="min-h-[100px] rounded break-words flex p-2" [style.background]="color() | cellColorPipe"
     (click)="openColorChooser()">
     @for (item of eatenPieces(); track $index) {
-    <app-piece [piece]="item" [selected]="false" class="text-[35px] float-right" />
+    <div class="size-[35px]">
+        <app-piece [piece]="item" [selected]="false" class="text-[35px]" />
+    </div>
+
     }
 </div>

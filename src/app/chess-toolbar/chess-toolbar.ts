@@ -8,18 +8,19 @@ import { GameManagerService } from '../services/game-manager-service';
 import { ChessboardService } from '../services/chessboard.service';
 import { ColorPickerDialogComponent } from '../shared/color-picker-dialog';
 import { OpeningService } from '../services/opening-service';
-import { Opening } from '../game-manager/models/Opening';
 import { PopupDialogService } from '../services/popup-dialog-service';
 import { OpeningDetailsDialog } from '../opening-tree/opening-details-dialog/opening-details-dialog';
 import { OpenAIService } from '../services/openai.service';
+import { CellColorPipe } from "../pipes/piece-color-pipe";
 
 @Component({
   selector: 'app-chess-toolbar',
-  imports: [MatToolbarModule, MatIconModule, MatSlideToggleModule, MatFormFieldModule, MatMenuModule],
+  imports: [MatToolbarModule, MatIconModule, MatSlideToggleModule, MatFormFieldModule, MatMenuModule, CellColorPipe],
   templateUrl: './chess-toolbar.html',
   styleUrl: './chess-toolbar.scss',
 })
 export class ChessToolbar {
+
 
   openAiService = inject(OpenAIService)
   openingService = inject(OpeningService)

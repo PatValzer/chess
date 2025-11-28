@@ -45,21 +45,6 @@ export class GameManagerService {
     }
   )
 
-  // bookOpening(nextMove: NextMove): Opening {
-  //   // const chess = new Chess()
-  //   // chess.load(this.chess.fen())
-  //   // chess.move(nextMove.san!)
-
-  //   const result = this.openingService
-  //     .openings()
-  //     .find(
-  //       s => s.eco == nextMove.opening?.eco && s.name == nextMove.opening.name
-  //     )
-  //     // .sort((a, b) => a.moves.length < b.moves.length ? -1 : 1)[0]
-  //   //console.log(moveNumber, result, chess.fen())
-  //   return result!
-  // }
-
   private currentOpening = computed(
     () => {
       if (this.currentMoveIndex() > 0 && this.mainChessBoard) {

@@ -46,7 +46,6 @@ export class OpeningDetailsDialog {
       this.openAiService.chat("this is the opening pgn i want you to analyze: " + this.opening.pgn).subscribe(
         (result) => {
           let response = result.choices?.[0]?.message?.content || 'No response';
-          console.log(response)
           this.aiOpeningExplanationHtml.update(s => response)
           localStorage.setItem(this.opening.pgn, response)
         }

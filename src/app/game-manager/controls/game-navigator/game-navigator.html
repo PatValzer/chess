@@ -1,4 +1,4 @@
-<div class="text-center font-size-2 grid grid-cols-[auto_auto_auto_auto_auto] gap-2 items-center justify-center">
+<div class="text-center font-size-2 grid grid-cols-[20%_20%_20%_20%_20%] gap-2 items-center justify-center">
     <button mat-button (click)="gameManagerService.goToMove(-1)" [disabled]="gameManagerService.currentMoveIndex() <= 1">
         <mat-icon fontSet="material-symbols-outlined">fast_rewind</mat-icon></button>
     <button mat-button (click)="gameManagerService.prevMove()" [disabled]="gameManagerService.currentMoveIndex() <= 0">

@@ -1,6 +1,6 @@
 import { Component, computed, inject, input, InputSignal } from '@angular/core';
-import { PieceTypePipe } from "../../pipes/piece-type-pipe";
-import { PieceColorPipe } from "../../pipes/piece-color-pipe";
+import { PieceTypePipe } from "../../../pipes/piece-type-pipe";
+import { PieceColorPipe } from "../../../pipes/piece-color-pipe";
 import { Piece } from '../../models/Piece';
 import { ChessboardService } from '../../../services/chessboard.service';
 

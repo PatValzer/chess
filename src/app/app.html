@@ -2,7 +2,6 @@
     <app-chess-toolbar (resetGame)="restart($event)"></app-chess-toolbar>
 </div>
 <div class="m-auto mt-2 rounded-xl bg-gray-200 p-3 grid md:grid-cols-[auto_25%_25%] gap-2 max-w-[90%]">
-    <!-- <div class="w-100 text-3xl font-bold underline"> {{gameManagerService.currentOpening()}}</div> -->
     <app-chessboard class="w-full"></app-chessboard>
     <app-game-manager class="w-[auto]" [resetGame]="resetGame()"></app-game-manager>
     <!-- <div>

@@ -1,11 +1,11 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 
 export type PlayerSide = 'w' | 'b';
 
-export interface CountdownConfig {
-  initial: number;        // ms
-  increment?: number;     // Fischer increment (ms)
-  delay?: number;         // Bronstein delay (ms)
+export class CountdownConfig {
+  initial: number = 300000    // ms
+  increment?: number = 0     // Fischer increment (ms)
+  delay?: number = 0         // Bronstein delay (ms)
 }
 
 @Injectable({ providedIn: 'root' })
@@ -13,15 +13,21 @@ export class CountdownService {
 
   private intervalId: number | null = null;
 
+  private config: CountdownConfig = new CountdownConfig();
   // State signals
-  readonly timeWhite = signal(300000);
-  readonly timeBlack = signal(300000);
+  readonly timeWhite = signal(this.config?.initial);
+  readonly timeBlack = signal(this.config?.initial);
 
   readonly activePlayer = signal<PlayerSide>('w');
   readonly isRunning = signal(false);
   readonly delayRemaining = signal(0);
 
-  private config!: CountdownConfig;
+  private activePlayerChangedEffect = effect(
+    () => {
+      const active = this.activePlayer()  
+      this.switchTurn()    
+    })
+
 
   /** Initialize both timers */
   init(config: CountdownConfig): void {
@@ -76,10 +82,8 @@ export class CountdownService {
     // Apply increment to player who just moved
     if (this.activePlayer() === 'w') {
       this.timeWhite.update(t => t + inc);
-      this.activePlayer.set('b');
     } else {
       this.timeBlack.update(t => t + inc);
-      this.activePlayer.set('w');
     }
 
     // Reset Bronstein delay

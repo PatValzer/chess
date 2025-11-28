@@ -1,7 +1,7 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
-import { COLORS } from '../COLORS';
-import { ChessboardService } from '../../services/chessboard.service';
-import { CellService } from '../../services/cell.service';
+import { COLORS } from '../chessboard/COLORS';
+import { ChessboardService } from '../services/chessboard.service';
+import { CellService } from '../services/cell.service';
 
 @Pipe({
   name: 'pieceColorPipe',

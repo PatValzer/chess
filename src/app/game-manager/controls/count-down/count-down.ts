@@ -1,14 +1,16 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { CountdownService } from '../../../services/countdown-service';
 import { GameManagerService } from '../../../services/game-manager-service';
+import { CellColorPipe, PieceColorPipe } from "../../../pipes/piece-color-pipe";
+import { CountDownFormatPipePipe } from "../../../pipes/count-down-format-pipe";
 
 @Component({
   selector: 'app-count-down',
-  imports: [],
+  imports: [CellColorPipe, PieceColorPipe, CountDownFormatPipePipe],
   templateUrl: './count-down.html',
   styleUrl: './count-down.scss',
 })
-export class CountDown {
+export class CountDownComponent {
   countDownColor = input.required<'w' | 'b'>()
 
   readonly gameManagerService = inject(GameManagerService);
@@ -17,12 +19,6 @@ export class CountDown {
   readonly whiteMs = this.countdownService.timeWhite;
   readonly blackMs = this.countdownService.timeBlack;
 
-  readonly whiteTimeFormatted = computed(() => this.format(this.whiteMs()));
-  readonly blackTimeFormatted = computed(() => this.format(this.blackMs()));
-
-  start() {
-    this.countdownService.start();
-  }
 
   stop() {
     this.countdownService.stop();
@@ -30,7 +26,10 @@ export class CountDown {
 
   switch = effect(
     () => {
-      this.countdownService.activePlayer.update(s => this.gameManagerService.currentTurn());
+      if (this.gameManagerService.currentMoveIndex() > 0 && !this.gameManagerService.reviewMode()) {
+        this.countdownService.start();
+        this.countdownService.activePlayer.update(s => this.gameManagerService.currentTurn());
+      }
     }
   )
 
@@ -38,15 +37,5 @@ export class CountDown {
     this.countdownService.reset();
   }
 
-  private format(ms: number): string {
-    const h = Math.floor(ms / 3600000);
-    if (h > 0) {
-      const min = Math.floor((ms % 3600000) / 60000);
-      const sec = Math.floor((ms % 60000) / 1000);
-      return `${h.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-    }
-    const min = Math.floor(ms / 60000);
-    const sec = Math.floor((ms % 60000) / 1000);
-    return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-  }
+
 }

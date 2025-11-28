@@ -3,8 +3,8 @@ import { Component, computed, inject, input, InputSignal, Signal, untracked } fr
 import { ChessboardService } from '../../../services/chessboard.service';
 import { GameManagerService } from '../../../services/game-manager-service';
 import { Square } from '../../models/Square';
-import { PieceTypePipe } from "../../pipes/piece-type-pipe";
-import { CellColorPipe } from "../../pipes/piece-color-pipe";
+import { PieceTypePipe } from "../../../pipes/piece-type-pipe";
+import { CellColorPipe } from "../../../pipes/piece-color-pipe";
 import { PieceComponent } from "../piece/piece";
 import { MatDialog } from '@angular/material/dialog';
 import { ColorPickerDialogComponent } from '../../../shared/color-picker-dialog';

@@ -29,12 +29,15 @@ export class Chessboard {
 
   allDropListIds = computed(
     () => {
-      return this.chessboardService.cells
+      const result = this.chessboardService.cells
         .flat()
         .map(
           (cell) => `cell-${cell().coordinates.toString()}`
         );
+      console.log("allDropListIds", result)
+      return result
     }
+
   )
 
 }

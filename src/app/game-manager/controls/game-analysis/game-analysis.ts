@@ -17,19 +17,6 @@ export class GameAnalysis {
 
   constructor() {
 
-    effect(
-      () => {
-        if (this.gameManagerService.enablePcPlayer() && !this.gameManagerService.reviewMode()) {
-          const lastMove = this.gameManagerService.moves()[this.gameManagerService.moves().length - 1]
-          if (!lastMove || lastMove.lan != this.stockfish.result().bestMove()) {
-            console.log("Player " + (this.gameManagerService.currentTurn() == 'w' ? 'WHITE' : 'BLACK') + " is making a move ")
-            this.gameManagerService.move(this.stockfish.result().bestMove())
-          }
-
-        }
-
-      }
-    )
 
   }
 

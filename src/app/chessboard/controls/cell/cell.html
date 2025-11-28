@@ -1,12 +1,11 @@
 <div style="width: calc(100% - 1px);  container-type: size;" (click)="cellClick($event)" [style.boxShadow]="boxShadow()"
     [style.--cell-color]="cell().displayColor | cellColorPipe : opacity()"
     class="bg-[var(--cell-color)] overflow-hidden; aspect-square">
-
-    @if ( cell().piece() != null ) {
-
-    <app-piece [piece]="cell().piece()!!" [selected]="selected()" cdkDrag [cdkDragData]="cell()"
+    @let piece = cell().piece();
+    @if ( piece != null ) {
+    <app-piece [piece]="piece" [selected]="selected()" cdkDrag [cdkDragData]="cell()"
         [cdkDragDisabled]="chessboardService.selectedPieceSquare() != null" (cdkDragStarted)="onDragStart($event)"
-        class="size-full overflow-hidden !text-[70cqw] flex items-center justify-center">
+        class="size-full overflow-hidden  flex items-center justify-center text-[70cqw]">
     </app-piece>
     }
 

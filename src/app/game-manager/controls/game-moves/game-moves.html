@@ -1,10 +1,10 @@
 <div class="text-[10px] max-w-[320px] m-auto overflow-hidden" [class.float-right]="!horizontal()"
     [class.leading-[20px]]="!horizontal()" [class.min-h-[400px]]="!horizontal()">
     <div class="grid mt-3 mr-1" [class.min-w-[170px]]="!horizontal()" [class.grid-cols-[30px_auto_auto]]="!horizontal()"
-        [class.grid-cols-[repeat(auto-fit,minmax(0,35px))]]="horizontal()">
+        [class.grid-cols-9]="horizontal()">
         @for (item of gameManagerService.moves(); track $index) {
         @if($index % 2 == 0){
-        <div class="text-right text-black font-bold">{{($index / 2) + 1}}.</div>
+        <div class="text-black font-bold flex items-center justify-end" >{{($index / 2) + 1}}.</div>
         }
         <div>
             <button mat-button [class.currentMove]="gameManagerService.currentMoveIndex() - 1 == $index"

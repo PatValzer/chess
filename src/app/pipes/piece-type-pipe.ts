@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { PieceSymbol } from 'chess.js';
-import { PieceType } from '../models/PieceType';
+import { PieceType } from '../chessboard/models/PieceType';
 
 @Pipe({
   name: 'pieceTypePipe'

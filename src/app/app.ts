@@ -1,5 +1,5 @@
 // Root Angular component for the chess app UI
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { Chessboard } from "./chessboard/chessboard";
 import { GameManager } from "./game-manager/game-manager";
 import { GameManagerService } from './services/game-manager-service';
@@ -7,6 +7,7 @@ import { ChessboardService } from './services/chessboard.service';
 import { ChessToolbar } from "./chess-toolbar/chess-toolbar";
 import { OpeningTreeComponent } from "./opening-tree/opening-tree";
 import { OpeningService } from './services/opening-service';
+import { StockfishService } from './services/stockfish-service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,22 @@ export class App {
   restart(reset: boolean) {
     this.resetGame.update(s => s + 1)
   }
+  stockfish = inject(StockfishService)
+  
+  stockfishEffect = effect(
+    () => {
+      if (this.gameManagerService.enablePcPlayer() && !this.gameManagerService.reviewMode()) {
+        const lastMove = this.gameManagerService.moves()[this.gameManagerService.moves().length - 1]
+        if (!lastMove || lastMove.lan != this.stockfish.result().bestMove()) {
+          console.log("Player " + (this.gameManagerService.currentTurn() == 'w' ? 'WHITE' : 'BLACK') + " is making a move ")
+          this.gameManagerService.move(this.stockfish.result().bestMove())
+        }
+
+      }
+
+    }
+  )
+
 
   // App title signal for reactive UI
   protected readonly title = signal('chess');
