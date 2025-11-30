@@ -9,13 +9,14 @@ import { GameMoves } from "../../game-manager/controls/game-moves/game-moves";
 import { MatButtonModule } from '@angular/material/button';
 import { OpeningService } from '../../services/opening-service';
 import { OpenAIService } from '../../services/openai.service';
+import { StockfishService } from '../../services/stockfish-service';
 
 @Component({
   selector: 'app-opening-details-dialog',
   imports: [MatDialogModule, Chessboard, GameNavigator, GameMoves, MatButtonModule],
   templateUrl: './opening-details-dialog.html',
   styleUrl: './opening-details-dialog.scss',
-  providers: [GameManagerService, ChessboardService]
+  providers: [GameManagerService, ChessboardService, StockfishService]
 })
 export class OpeningDetailsDialog {
 
