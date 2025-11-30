@@ -34,7 +34,6 @@ export class Chessboard {
         .map(
           (cell) => `cell-${cell().coordinates.toString()}`
         );
-      console.log("allDropListIds", result)
       return result
     }
 

@@ -43,8 +43,6 @@ export class CellComponent {
 
 
   cellClick($event: PointerEvent) {
-
-
     if (this.selectedSquare() && !this.selectedSquare()?.coordinates.equals(this.cell().coordinates)) {
       const selectedSquare = this.selectedSquare as Signal<Square>
       if (this.availableDestination()) {
@@ -56,7 +54,6 @@ export class CellComponent {
     else
       if (this.cell().piece()) {
         this.chessboardService.selectedPieceSquare.set(this.cell())
-        console.log("selected piecesquare", new PieceTypePipe().transform(this.selectedPiece()?.pieceSymbol), this.selectedPiece()?.pieceColor)
       }
 
   }
