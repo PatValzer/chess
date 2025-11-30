@@ -1,11 +1,14 @@
     @use '@angular/material' as mat;
-    
+
     @include mat.tabs-overrides((active-focus-indicator-color: orange,
             active-focus-label-text-color: red,
         ));
 
 
     :host {
+        ::ng-deep .mat-mdc-tab-body-wrapper {
+            @apply h-full;
+        }
 
         /* Tabs container */
         ::ng-deep .mat-mdc-tab-labels {

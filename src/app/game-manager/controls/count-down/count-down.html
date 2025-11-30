@@ -1,5 +1,4 @@
 <div class="text-right md:text-[35px] p-2" [style.color]="countDownColor() == 'w' ? 'b' : 'w' | pieceColorPipe"
-    [style.backgroundColor]="countDownColor() | cellColorPipe"
     [class.font-bold]="gameManagerService.currentTurn() == countDownColor()">
     ⏱ {{(countDownColor() == 'w' ? whiteMs() : blackMs()) | countDownFormatPipe}}
 </div>

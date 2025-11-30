@@ -1,14 +1,18 @@
 <div class="w-full italic text-right col-span-3 pb-5">
     <app-chess-toolbar (resetGame)="restart($event)"></app-chess-toolbar>
 </div>
-<div class="m-auto mt-2 rounded-xl bg-gray-200 p-3 grid md:grid-cols-[auto_25%_25%] gap-2 max-w-[90%]">
-    <app-chessboard class="w-full"></app-chessboard>
-    <app-game-manager class="w-[auto]" [resetGame]="resetGame()"></app-game-manager>
-    <!-- <div>
+<div class="m-auto mt-2 rounded-xl bg-gray-200 p-3 grid grid-cols-[10%_90%] md:grid-cols-1 gap-2 max-w-[90%]">
+    <app-game-analysis [justBar]="true" class="block md:hidden h-full " />
+    <div class="grid md:grid-cols-[auto_25%_25%] gap-2">
+        <app-chessboard class="w-full"></app-chessboard>
+        <app-game-manager class="w-[auto]" [resetGame]="resetGame()"></app-game-manager>
+        <!-- <div>
         <mat-label class="text-right bg-[rgba(0,0,0,0.46)]  text-white w-full inline-block p-3 rounded">Opening
             Tree</mat-label> -->
-    <app-opening-tree
-        class="hidden md:block scrollbar scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-500 scrollbar-track-rounded-md scrollbar-track-gray-200 overflow-auto md:max-h-[800px] max-w-[400px] rounded-3xl p-3 m-auto mt-0 bg-white"
-        [openings]="openingService.selectedOpeningTree().length == 0 ? openingService.openingTree() : openingService.selectedOpeningTree()" />
+        <app-opening-tree
+            class="hidden md:block scrollbar scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-500 scrollbar-track-rounded-md scrollbar-track-gray-200 overflow-auto md:max-h-[800px] max-w-[400px] rounded-3xl p-3 m-auto mt-0 bg-white"
+            [openings]="openingService.selectedOpeningTree().length == 0 ? openingService.openingTree() : openingService.selectedOpeningTree()" />
+    </div>
+
 
 </div>

@@ -12,6 +12,8 @@ import { PopupDialogService } from '../services/popup-dialog-service';
 import { OpeningDetailsDialog } from '../opening-tree/opening-details-dialog/opening-details-dialog';
 import { OpenAIService } from '../services/openai.service';
 import { CellColorPipe } from "../pipes/piece-color-pipe";
+import { Piece } from 'chess.js';
+import { BreakpointService } from '../services/breakpoint-service';
 
 @Component({
   selector: 'app-chess-toolbar',
@@ -21,13 +23,13 @@ import { CellColorPipe } from "../pipes/piece-color-pipe";
 })
 export class ChessToolbar {
 
-
   openAiService = inject(OpenAIService)
   openingService = inject(OpeningService)
   gameManagerService = inject(GameManagerService)
   chessboardService = inject(ChessboardService)
   popupDialogService = inject(PopupDialogService)
-
+  breakpointService = inject(BreakpointService)
+  
   chess = computed(
     () => {
       return this.gameManagerService.chess

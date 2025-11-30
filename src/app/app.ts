@@ -8,10 +8,11 @@ import { ChessToolbar } from "./chess-toolbar/chess-toolbar";
 import { OpeningTreeComponent } from "./opening-tree/opening-tree";
 import { OpeningService } from './services/opening-service';
 import { StockfishService } from './services/stockfish-service';
+import { GameAnalysis } from "./game-manager/controls/game-analysis/game-analysis";
 
 @Component({
   selector: 'app-root',
-  imports: [Chessboard, GameManager, ChessToolbar, OpeningTreeComponent],
+  imports: [Chessboard, GameManager, ChessToolbar, OpeningTreeComponent, GameAnalysis],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   providers: [GameManagerService, ChessboardService]

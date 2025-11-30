@@ -1,9 +1,11 @@
-<div class="grid  grid-cols-[20px_auto] gap-4">
+<div class="grid  grid-cols-[20px_auto] gap-4 h-full ">
     <div class="rounded-full">
         <app-win-probability-bar [verticalBar]="true" [positionAnalysis]="positionAnalysis()" [showInnerLabels]="false"
-            [showLabels]="false" class="w-full h-[400px] block " />
+            [showLabels]="false" class="w-full h-full block " />
     </div>
-    <div>whiteWinProbability: {{stockfish.result().whiteWinProbability}}
+    @if(!justBar()){
+    <div>
+        whiteWinProbability: {{stockfish.result().whiteWinProbability}}
         <br>
         blackWinProbability: {{stockfish.result().blackWinProbability}}
         <br>
@@ -18,4 +20,5 @@
         <br>
         }
     </div>
+    }
 </div>

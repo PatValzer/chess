@@ -12,6 +12,7 @@ import { OpeningService } from '../services/opening-service';
 import { BreakpointService } from '../services/breakpoint-service';
 import { CountdownService } from '../services/countdown-service';
 import { CountDownComponent } from "./controls/count-down/count-down";
+import { CellColorPipe } from "../pipes/piece-color-pipe";
 
 @Component({
   selector: 'app-game-manager',
@@ -23,7 +24,8 @@ import { CountDownComponent } from "./controls/count-down/count-down";
     GameNavigatorComponent,
     GameAnalysisComponent,
     MatTabsModule,
-    CountDownComponent
+    CountDownComponent,
+    CellColorPipe
   ],
   templateUrl: './game-manager.html',
   styleUrl: './game-manager.scss'
@@ -31,6 +33,7 @@ import { CountDownComponent } from "./controls/count-down/count-down";
 
 export class GameManager {
 
+  eatenPiecesColorShown = signal<'w' | 'b'>('w')
   resetGame = input.required<number>()
 
   showPgn: boolean = false;
@@ -54,7 +57,7 @@ export class GameManager {
       () => {
         const currentTurn = this.gameManagerService.currentTurn();
         if (this.gameManagerService.currentMoveIndex() > 0 && !this.gameManagerService.reviewMode()) {
-          //this.countDownService.switchTurn()
+          this.eatenPiecesColorShown.set(this.gameManagerService.currentTurn())
         }
       }
     )

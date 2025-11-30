@@ -1,19 +1,26 @@
+@let colorBlack = 'b';
+@let colorWhite = 'w';
+
 @if(breakpointService.isMobile()){
+
 <div class="grid">
-    <div class="w-full grid grid-cols-2">
-        <app-count-down countDownColor="w"></app-count-down>
-        <app-count-down countDownColor="b"></app-count-down>
+    <div class="w-full grid grid-cols-2"
+        (click)="eatenPiecesColorShown.set( eatenPiecesColorShown() == 'w' ? 'b' : 'w' )">
+        <app-count-down countDownColor="w" [style.background]="colorWhite | cellColorPipe : 0.8"></app-count-down>
+        <app-count-down countDownColor="b" [style.background]="colorBlack | cellColorPipe : 0.7"></app-count-down>
     </div>
-    <app-eaten-pieces [color]="gameManagerService.currentTurn()"></app-eaten-pieces>
+    <app-eaten-pieces [color]="eatenPiecesColorShown()"
+        [style.background]="eatenPiecesColorShown() | cellColorPipe : 0.7"></app-eaten-pieces>
     <app-game-moves [horizontal]="true" />
+
 </div>
 }
 @else {
-<div class="grid max-h-[800px] grid-cols-1 float-right grid-rows-[auto_465px_auto_auto]">
-    <div>
-        @let color = 'b';
-        <app-eaten-pieces [color]="color"></app-eaten-pieces>
-        <app-count-down [countDownColor]="color"></app-count-down>
+<div class="grid max-h-[800px] grid-cols-1 float-right gap-2 grid-rows-[auto_400px_auto_auto]">
+
+    <div [style.background]="colorBlack | cellColorPipe : 0.7">
+        <app-eaten-pieces [color]="colorBlack"></app-eaten-pieces>
+        <app-count-down [countDownColor]="colorBlack"></app-count-down>
     </div>
     <div>
         <mat-tab-group class="!h-full" mat-stretch-tabs="false" mat-align-tabs="start">
@@ -35,9 +42,11 @@
     </div>
 
     <app-game-navigator />
-    <div>
-        <app-count-down [countDownColor]="'w'"></app-count-down>
-        <app-eaten-pieces color="w" />
+
+    <div [style.background]="colorWhite | cellColorPipe : 0.8">
+        <app-count-down [countDownColor]="colorWhite"></app-count-down>
+        <app-eaten-pieces [color]="colorWhite"></app-eaten-pieces>
+
     </div>
 </div>
 }

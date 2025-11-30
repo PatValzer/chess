@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, Signal } from '@angular/core';
+import { Component, computed, effect, inject, input, Signal } from '@angular/core';
 import { StockfishService } from '../../../services/stockfish-service';
 
 import { PositionAnalysis, WinProbabilityBar } from "../win-probability-bar/win-probability-bar";
@@ -14,11 +14,8 @@ export class GameAnalysis {
   // Inject Stockfish chess engine service
   stockfish = inject(StockfishService)
   gameManagerService = inject(GameManagerService)
+  justBar = input(false)
 
-  constructor() {
-
-
-  }
 
   // Computed signal for position analysis based on Stockfish results
 
