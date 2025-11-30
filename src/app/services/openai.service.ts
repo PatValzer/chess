@@ -1,4 +1,4 @@
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { effect, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class OpenAIService {
   //private apiUrl = 'https://api.openai.com/v1/chat/completions';
   private apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
-  apiKey: WritableSignal<string> = signal('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')
+  apiKey: WritableSignal<string | null> = signal(localStorage.getItem("openai_api_key"))
 
   private inizializeMessage = "I'm going to give you a pgn sequence of chess moves representing an opening. " +
     " I want you to explain me that opening, focusing on which one are the main tactical tricks." +
@@ -17,24 +17,33 @@ export class OpenAIService {
     + " all css inline."
 
 
+  apiKeyToLocalStorageEffect = effect(
+    ()=>{
+      localStorage.setItem("openai_api_key", this.apiKey() || '')
+    }
+  )
+
   http = inject(HttpClient);
 
   chat(message: string): Observable<any> {
-    if (this.apiKey() == '') {
+    
+    if (this.apiKey() == '' || this.apiKey() == null) {
       throw new Error("OpenAI API key is not set.");
     }
-    console.log("Using API Key: ", this.apiKey());
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.apiKey()}`,
-    });
+    else {
+      console.log("Using API Key: ", this.apiKey());
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.apiKey()}`,
+      });
 
-    const body = {
-      model: 'gpt-4o-mini',
-      messages: [{ role: 'user', content: this.inizializeMessage + " " + message }],
-    };
+      const body = {
+        model: 'gpt-4o-mini',
+        messages: [{ role: 'user', content: this.inizializeMessage + " " + message }],
+      };
 
-    return this.http.post(this.apiUrl, body, { headers });
+      return this.http.post(this.apiUrl, body, { headers });
+    }
   }
 
   generateText(prompt: string): Observable<any> {
