@@ -5,10 +5,11 @@ import { PieceComponent } from "../piece/piece";
 import { Piece } from '../../models/Piece';
 import { COLORS } from '../../COLORS';
 import { PieceSymbol } from 'chess.js';
+import { PieceColorPipe, CellColorPipe } from "../../../pipes/piece-color-pipe";
 
 @Component({
   selector: 'app-promotion-dialog',
-  imports: [PieceComponent, MatDialogModule],
+  imports: [PieceComponent, MatDialogModule, PieceColorPipe, CellColorPipe],
   templateUrl: './promotion-dialog.html',
   styleUrl: './promotion-dialog.scss',
 })
@@ -23,6 +24,7 @@ export class PromotionDialog {
     const color = this.data.currentColor
     const pieces: PieceSymbol[] = ['b', 'n', 'r', 'q']
     this.pieces = pieces.map((pieceSymbol) => new Piece(color, pieceSymbol))
+    console.log(this.pieces);
   }
 
   pieces: Piece[] = []

@@ -15,7 +15,7 @@
 
 
         <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-40"
-            (click)="gameManagerService.prevMove()" [disabled]="gameManagerService.currentMoveIndex() <= 1"
+            (click)="gameManagerService.prevMove()" [disabled]="gameManagerService.currentMoveIndex() <= 0"
             title="Undo (Z)">
             <mat-icon fontIcon="undo"></mat-icon>
         </button>
@@ -23,42 +23,45 @@
 
         <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-40"
             (click)="gameManagerService.nextMove()"
-            [disabled]="gameManagerService.currentMoveIndex() >= gameManagerService.chess.history().length"
-            title="Redo (Y)">
+            [disabled]="gameManagerService.currentMoveIndex() >= gameManagerService.moves().length" title="Redo (Y)">
             <mat-icon fontIcon="redo"></mat-icon>
         </button>
 
 
-        <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 justify-end flex" (click)="emitFlipBoard()"
+        <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 justify-end flex" (click)="flipBoard()"
             title="Flip board (F)">
             <mat-icon fontIcon="swap_horiz"></mat-icon>
         </button>
     </div>
 
     <div [style.backgroundColor]="'b' | cellColorPipe : 0.7" [style.color]="'w' | cellColorPipe"
-        class="w-full md:w-[450px] text-center bg-white p-3 rounded text-[12px]" (click)="showOpeningDetails()">
+        class="w-full md:w-[450px] text-center bg-white p-3 rounded  " (click)="showOpeningDetails()">
         @if(currentOpening()){
-        <span>
+        <span class="cursor-pointer text-[12px]">
             {{currentOpening()?.eco}} -
             {{currentOpening()?.name}}</span>
         }
     </div>
 
-    <div class="grid grid-cols-[25%_50%_25%]">
-
-        <div (click)="openColorChooser()"
-            [style.backgroundColor]="gameManagerService.currentTurn() == 'w' ? chessboardService.whitePieceColor() : chessboardService.blackPieceColor()"
-            [style.color]="gameManagerService.currentTurn() == 'w' ? chessboardService.blackPieceColor() : chessboardService.whitePieceColor()"
-            class="rounded border-[1px] border-black  text-center text-[10px] flex items-center justify-center cursor-pointer">
-            {{gameManagerService.currentTurn() == 'w' ? 'White' : 'Black'}} <br>turn
+    <div class="grid grid-cols-[25%_25%_50%] gap-2">
+        @for( color of ['w', 'b']; track $index) {
+        <div (click)="openColorChooser(color)"
+            [style.backgroundColor]="color == 'w'  ? chessboardService.whitePieceColor() : chessboardService.blackPieceColor()"
+            [style.color]="color == 'w' ? chessboardService.blackPieceColor() : chessboardService.whitePieceColor()"
+            class="relative rounded border-[1px] border-black  text-center text-[10px] flex items-center justify-center cursor-pointer">
+            @if(color == gameManagerService.currentTurn()) {
+            {{color == 'w' ? 'White' : 'Black'}} <br>turn
+            }
+            <div class="text-green-600 absolute top-0 left-0 p-1">
+                <button mat-icon-button (click)="toggleEnablePcPlayer(color);$event.stopPropagation()" class="w-full"
+                    [class.!text-gray-300]="color == 'w' ? !gameManagerService.whitePcPlayerEnabled() : !gameManagerService.blackPcPlayerEnabled()">
+                    <mat-icon fontIcon="computer" class="text-[20px] !overflow-visible "></mat-icon>
+                </button>
+            </div>
         </div>
+        }
 
-        <div class="text-green-600 flex items-center justify-center">
-            <button mat-icon-button (click)="toggleEnablePcPlayer()" class="w-full"
-                [class.!text-gray-300]="!gameManagerService.enablePcPlayer()">
-                <mat-icon fontIcon="computer" class="text-[50px] !overflow-visible "></mat-icon>
-            </button>
-        </div>
+
 
         <div class="flex items-center gap-2 justify-end">
             <div class="relative">

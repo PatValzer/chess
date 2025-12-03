@@ -15,7 +15,7 @@ export type ColumnLetter = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h'
 export class ChessboardService {
 
   cells: WritableSignal<Square>[][] = []
-  selectedPieceSquare = signal<Square | null>(null);
+  selectedSquare = signal<Square | null>(null);
 
   readonly whitePieceColor = signal<string>("#FFFFFF")
   readonly blackPieceColor = signal<string>("rgb(90 90 90)")
@@ -28,6 +28,12 @@ export class ChessboardService {
     this.inizializeChessboard()
   }
 
+  
+  flipBoard() {
+    this.cells.reverse()
+    this.cells.forEach((row => row.reverse()))
+
+  }
 
   displayFenPosition(fen: string) {
     if (this.cells.length) {

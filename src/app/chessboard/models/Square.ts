@@ -19,8 +19,10 @@ export class Square {
     this.coordinates = new Coordinates(column, row)
     const evenColumn = column === 'b' || column === 'd' || column === 'f' || column === 'h';
     const evenRow = ((row ?? 0) % 2) === 0;
-    const color = (evenColumn && evenRow) || (!evenColumn && !evenRow) ? 'w' : 'b';
+    const color = (evenColumn && evenRow) || (!evenColumn && !evenRow) ? 'b' : 'w';
     this.displayColor = color;
   }
+
+  
 
 }

@@ -14,6 +14,7 @@ import { OpenAIService } from '../services/openai.service';
 import { CellColorPipe } from "../pipes/piece-color-pipe";
 import { Piece } from 'chess.js';
 import { BreakpointService } from '../services/breakpoint-service';
+import { COLORS } from '../chessboard/COLORS';
 
 @Component({
   selector: 'app-chess-toolbar',
@@ -29,7 +30,7 @@ export class ChessToolbar {
   chessboardService = inject(ChessboardService)
   popupDialogService = inject(PopupDialogService)
   breakpointService = inject(BreakpointService)
-  
+
   chess = computed(
     () => {
       return this.gameManagerService.chess
@@ -67,20 +68,17 @@ export class ChessToolbar {
   }
 
 
-  openColorChooser() {
-    const currentTurn = this.gameManagerService.currentTurn()
-    const data = {
-      currentColor: currentTurn == 'w' ?
-        this.chessboardService.whitePieceColor() :
-        this.chessboardService.blackPieceColor(),
+  openColorChooser(colorSelected: string) {
 
-      title: "Choose " + (currentTurn == "w" ? 'white' : 'black') + " piece color"
+    const data = {
+      currentColor: colorSelected,
+      title: "Choose " + (colorSelected == "w" ? 'white' : 'black') + " piece color"
     }
     this.popupDialogService.startDialog<ColorPickerDialogComponent, string>(
       ColorPickerDialogComponent,
       data,
       (color) => {
-        this.chessboardService.setPiecesColor(currentTurn, color)
+        this.chessboardService.setPiecesColor(colorSelected as COLORS, color)
       }
     )
   }
@@ -90,8 +88,10 @@ export class ChessToolbar {
     alert(fen)
   }
 
-  toggleEnablePcPlayer() {
-    this.gameManagerService.enablePcPlayer.set(!this.gameManagerService.enablePcPlayer());
+  toggleEnablePcPlayer(color: string) {
+    color == "w" ?
+      this.gameManagerService.whitePcPlayerEnabled.set(!this.gameManagerService.whitePcPlayerEnabled()) :
+      this.gameManagerService.blackPcPlayerEnabled.set(!this.gameManagerService.blackPcPlayerEnabled())
   }
 
   canUndo = input(false);
@@ -105,7 +105,6 @@ export class ChessToolbar {
   newGame = output<void>();
   undo = output<void>();
   redo = output<void>();
-  flipBoard = output<void>();
   importFen = output<string>();
   toggleMoveList = output<boolean>();
   resetGame = output<boolean>();
@@ -117,7 +116,7 @@ export class ChessToolbar {
   moreOpen = false;
 
   // Methods to trigger outputs
-  emitFlipBoard() { this.flipBoard.emit(); }
+  flipBoard() { this.chessboardService.flipBoard(); }
 
   emitImportFen(fen: string) { if (fen) this.importFen.emit(fen.trim()); }
   emitToggleMoveList(show: boolean) { this.toggleMoveList.emit(show); }

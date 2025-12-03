@@ -2,7 +2,6 @@ import { Component, computed, inject, input, InputSignal, untracked } from '@ang
 import { ColorPickerDialogComponent } from '../../../shared/color-picker-dialog';
 import { GameManagerService } from '../../../services/game-manager-service';
 import { COLORS } from '../../../chessboard/COLORS';
-import { CellColorPipe } from "../../../pipes/piece-color-pipe";
 import { CellService } from '../../../services/cell.service';
 import { Piece } from '../../../chessboard/models/Piece';
 import { PieceSymbol } from 'chess.js';
@@ -14,7 +13,7 @@ import { PieceComponent } from "../../../chessboard/controls/piece/piece";
   selector: 'app-eaten-pieces',
   templateUrl: './eaten-pieces.html',
   styleUrls: ['./eaten-pieces.scss'],
-  imports: [CellColorPipe, PieceComponent]
+  imports: [PieceComponent]
 })
 export class EatenPiecesComponent {
   private cellService = inject(CellService)
