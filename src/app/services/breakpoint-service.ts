@@ -11,11 +11,11 @@ export interface BreakpointDefinition {
 export class BreakpointService {
   // Define all breakpoints here
   private readonly breakpoints: BreakpointDefinition[] = [
-    { name: 'xs', query: '(max-width: 575.99px)' },
-    { name: 'sm', query: '(min-width: 576px) and (max-width: 767.99px)' },
-    { name: 'md', query: '(min-width: 768px) and (max-width: 991.99px)' },
-    { name: 'lg', query: '(min-width: 992px) and (max-width: 1199.99px)' },
-    { name: 'xl', query: '(min-width: 1200px)' },
+    { name: 'xs', query: '(max-width: 639.99px)' },
+    { name: 'sm', query: '(min-width: 640px) and (max-width: 767.99px)' },
+    { name: 'md', query: '(min-width: 768px) and (max-width: 1023.99px)' },
+    { name: 'lg', query: '(min-width: 1024px) and (max-width: 1279.99px)' },
+    { name: 'xl', query: '(min-width: 1280px)' },
   ];
 
   readonly current = signal<BreakpointName>(this.detectCurrent());
@@ -52,5 +52,9 @@ export class BreakpointService {
 
   isMobile(): boolean {
     return this.is('xs') || this.is('sm');
+  }
+
+  isTablet(): boolean {
+    return this.is('md') || this.is('lg');
   }
 }
