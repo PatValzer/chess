@@ -12,9 +12,14 @@ describe('WinProbabilityBar', () => {
       imports: [WinProbabilityBar],
       providers: [provideZonelessChangeDetection()]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(WinProbabilityBar);
+    fixture.componentRef.setInput('positionAnalysis', {
+      whiteWinProbability: 0,
+      drawProbability: 0,
+      blackWinProbability: 0
+    });
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

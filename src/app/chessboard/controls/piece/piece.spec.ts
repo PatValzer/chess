@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PieceComponent } from './piece';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideZonelessChangeDetection } from '@angular/core';
+
+import { Piece } from '../../models/Piece';
 
 describe('Piece', () => {
   let component: PieceComponent;
@@ -12,17 +12,16 @@ describe('Piece', () => {
     await TestBed.configureTestingModule({
       imports: [PieceComponent],
       providers: [
-        
         provideZonelessChangeDetection()
       ]
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(PieceComponent);
-    
+
     component = fixture.componentInstance;
-    // fixture.setInput('piece', { type: 'pawn', color: 'white' });
-    // fixture.setInput('selected', true);
+    fixture.componentRef.setInput('piece', new Piece('w', 'p'));
+    fixture.componentRef.setInput('selected', false);
 
     fixture.detectChanges();
   });

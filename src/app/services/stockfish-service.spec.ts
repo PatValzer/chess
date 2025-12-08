@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StockfishService } from './stockfish';
+import { StockfishService } from './stockfish-service';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('Stockfish', () => {

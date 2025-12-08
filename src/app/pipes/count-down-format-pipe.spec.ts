@@ -1,4 +1,4 @@
-import { CountDownFormatPipePipe } from './count-down-format-pipe-pipe';
+import { CountDownFormatPipePipe } from './count-down-format-pipe';
 
 describe('CountDownFormatPipePipe', () => {
   it('create an instance', () => {

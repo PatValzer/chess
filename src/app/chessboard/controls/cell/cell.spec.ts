@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CellComponent } from './cell';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { Square } from '../../models/Square';
 
 describe('Cell', () => {
   let component: CellComponent;
@@ -18,7 +19,9 @@ describe('Cell', () => {
       .compileComponents();
 
     fixture = TestBed.createComponent(CellComponent);
+    // fixture.setInput('cell', { file: 'a', rank: 1 });
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('cell', new Square('a', 1));
     fixture.detectChanges();
   });
 

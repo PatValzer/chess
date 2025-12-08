@@ -1,8 +1,7 @@
 <div class="w-full italic text-right col-span-3 pb-5">
   <app-chess-toolbar (resetGame)="restart($event)"></app-chess-toolbar>
 </div>
-<div
-  class="m-auto mt-2 rounded-xl bg-gray-200 p-3 grid grid-cols-[10%_90%] xl:grid-cols-2  gap-2 max-w-[90%] ">
+<div class="m-auto mt-2 rounded-xl bg-gray-200 p-3 grid grid-cols-[10%_90%] xl:grid-cols-2  gap-2 max-w-[90%] ">
   <app-game-analysis [justBar]="true" class="block xl:hidden h-full" />
   <app-chessboard class="w-full m-auto"></app-chessboard>
   <div class="grid xl:grid-cols-2 gap-2 col-span-2 xl:col-span-1">
@@ -16,7 +15,6 @@
         openingService.selectedOpeningTree().length == 0
           ? openingService.openingTree()
           : openingService.selectedOpeningTree()
-      "
-    />
+      " />
   </div>
 </div>
