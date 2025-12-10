@@ -32,6 +32,11 @@
             title="Flip board (F)">
             <mat-icon fontIcon="swap_horiz"></mat-icon>
         </button>
+
+        <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 justify-end flex" (click)="openOptions()"
+            title="Options">
+            <mat-icon fontIcon="settings"></mat-icon>
+        </button>
     </div>
 
     <div [style.backgroundColor]="'b' | cellColorPipe : 0.7" [style.color]="'w' | cellColorPipe"

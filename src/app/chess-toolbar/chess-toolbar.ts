@@ -16,9 +16,12 @@ import { Piece } from 'chess.js';
 import { BreakpointService } from '../services/breakpoint-service';
 import { COLORS } from '../chessboard/COLORS';
 
+import { OptionsComponent } from '../shared/options/options';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-chess-toolbar',
-  imports: [MatToolbarModule, MatIconModule, MatSlideToggleModule, MatFormFieldModule, MatMenuModule, CellColorPipe],
+  imports: [MatToolbarModule, MatIconModule, MatSlideToggleModule, MatFormFieldModule, MatMenuModule, CellColorPipe, MatDialogModule],
   templateUrl: './chess-toolbar.html',
   styleUrl: './chess-toolbar.scss',
 })
@@ -30,6 +33,11 @@ export class ChessToolbar {
   chessboardService = inject(ChessboardService)
   popupDialogService = inject(PopupDialogService)
   breakpointService = inject(BreakpointService)
+  dialog = inject(MatDialog)
+
+  openOptions() {
+    this.dialog.open(OptionsComponent)
+  }
 
   chess = computed(
     () => {

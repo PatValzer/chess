@@ -12,12 +12,13 @@ describe('GameManager', () => {
     await TestBed.configureTestingModule({
       imports: [GameManager],
       providers: [
-         provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withInterceptorsFromDi()),
         provideZonelessChangeDetection()]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(GameManager);
+    fixture.componentRef.setInput('resetGame', 0);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

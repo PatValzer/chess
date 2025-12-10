@@ -68,7 +68,7 @@ export class ChessboardService {
         } else {
           // Piece
           const coordinates = new Coordinates(columns[fileIndex], this.rows[r]);
-          const pieceColor = char === char.toUpperCase() ? 'w' : 'b'          
+          const pieceColor = char === char.toUpperCase() ? 'w' : 'b'
           const piece = new Piece(
             pieceColor,
             char.toLowerCase() as PieceSymbol,

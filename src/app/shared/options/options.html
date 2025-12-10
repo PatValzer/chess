@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Options</h2>
+<mat-dialog-content>
+    <div class="options-container">
+        <div class="section">
+            <h3>Board Theme</h3>
+            <div class="color-options">
+                <div class="option">
+                    <span>White Cell</span>
+                    <button class="color-preview" [style.background]="cellService.whiteCellColor()"
+                        (click)="openColorPicker('cell', 'w')"></button>
+                </div>
+                <div class="option">
+                    <span>Black Cell</span>
+                    <button class="color-preview" [style.background]="cellService.blackCellColor()"
+                        (click)="openColorPicker('cell', 'b')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Piece Theme</h3>
+            <div class="color-options">
+                <div class="option">
+                    <span>White Piece</span>
+                    <button class="color-preview" [style.background]="chessboardService.whitePieceColor()"
+                        (click)="openColorPicker('piece', 'w')"></button>
+                </div>
+                <div class="option">
+                    <span>Black Piece</span>
+                    <button class="color-preview" [style.background]="chessboardService.blackPieceColor()"
+                        (click)="openColorPicker('piece', 'b')"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="resetDefaults()">Reset Defaults</button>
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
