@@ -1,9 +1,7 @@
-<div class="min-h-[100px] rounded break-words flex flex-wrap p-2" 
-    (click)="openColorChooser()">
-    @for (item of eatenPieces(); track $index) {
+<div class="min-h-[100px] rounded break-words flex flex-wrap p-2">
+  @for (item of eatenPieces(); track $index) {
     <div class="size-[35px]">
-        <app-piece [piece]="item" [selected]="false" class="text-[35px]" />
+      <app-piece [piece]="item" [selected]="false" class="text-[35px]" />
     </div>
-
-    }
+  }
 </div>

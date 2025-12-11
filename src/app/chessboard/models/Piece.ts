@@ -7,6 +7,7 @@ export class Piece {
 
   constructor(
     public pieceColor: COLORS,
-    public pieceSymbol: PieceSymbol ) {
+    public pieceSymbol: PieceSymbol
+  ) {
   }
 }

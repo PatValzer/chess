@@ -22,7 +22,7 @@ class MockChessboardService {
 
 class MockGameManagerService {
   chess = {
-    fen: () => 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
+    fen: () => 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
   };
   whitePcPlayerEnabled = signal(false);
   blackPcPlayerEnabled = signal(false);
@@ -47,6 +47,7 @@ class MockOpenAIService {
 
 class MockBreakpointService {
   isMobile = () => false;
+  isTablet = () => false;
 }
 
 describe('ChessToolbar', () => {
@@ -73,8 +74,8 @@ describe('ChessToolbar', () => {
         { provide: OpeningService, useClass: MockOpeningService },
         { provide: PopupDialogService, useClass: MockPopupDialogService },
         { provide: OpenAIService, useClass: MockOpenAIService },
-        { provide: BreakpointService, useClass: MockBreakpointService }
-      ]
+        { provide: BreakpointService, useClass: MockBreakpointService },
+      ],
     })
       .overrideProvider(MatDialog, { useValue: dialogSpy })
       .compileComponents();
@@ -111,9 +112,9 @@ describe('ChessToolbar', () => {
     component.toggleEnablePcPlayer('w');
     // Expect signal to be toggled
     // Initial was false (mock default)
-    // Actually we can't easily check signal internal state if it acts on service directly 
+    // Actually we can't easily check signal internal state if it acts on service directly
     // without spying on set.
-    // Let's verify the logic: 
+    // Let's verify the logic:
     // this.gameManagerService.whitePcPlayerEnabled.set(!this.gameManagerService.whitePcPlayerEnabled())
     // Since we provided a real signal in Mock, we can check its value.
     expect(gameManagerService.whitePcPlayerEnabled()).toBe(true);

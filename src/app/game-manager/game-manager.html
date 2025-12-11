@@ -1,52 +1,60 @@
 @let colorBlack = 'b';
 @let colorWhite = 'w';
+
 @if (breakpointService.isMobile() || breakpointService.isTablet()) {
-<div class="grid">
-  <div class="w-full grid grid-cols-2" (click)="
+  <div class="grid">
+    <div
+      class="w-full grid grid-cols-2"
+      (click)="
         eatenPiecesColorShown.set(eatenPiecesColorShown() == colorWhite ? colorBlack : colorWhite)
-      ">
-    <app-count-down countDownColor="w" [style.background]="colorWhite | cellColorPipe: 0.8" />
-    <app-count-down countDownColor="b" [style.background]="colorBlack | cellColorPipe: 0.7" />
-  </div>
-  <app-eaten-pieces [color]="eatenPiecesColorShown()"
-    [style.background]="eatenPiecesColorShown() | cellColorPipe: 0.7" />
+      "
+    >
+      <app-count-down countDownColor="w" [style.background]="colorWhite | cellColorPipe: 0.8" />
+      <app-count-down countDownColor="b" [style.background]="colorBlack | cellColorPipe: 0.7" />
+    </div>
+    <app-eaten-pieces
+      [color]="eatenPiecesColorShown()"
+      [style.background]="eatenPiecesColorShown() | cellColorPipe: 0.7"
+    />
 
-  <app-game-moves [horizontal]="true" />
-</div>
+    <app-game-moves [horizontal]="true" />
+  </div>
 } @else {
-<div class="grid max-h-[800px] h-full grid-cols-1 float-right gap-2 grid-rows-[auto_auto_auto_auto]">
-  <div [style.background]="colorBlack | cellColorPipe: 0.7">
-    <app-eaten-pieces [color]="colorBlack" />
-    <app-count-down [countDownColor]="colorBlack" />
+  <div
+    class="grid max-h-[800px] h-full grid-cols-1 float-right gap-2 grid-rows-[auto_auto_auto_auto]"
+  >
+    <div [style.background]="colorBlack | cellColorPipe: 0.7">
+      <app-eaten-pieces [color]="colorBlack" />
+      <app-count-down [countDownColor]="colorBlack" />
+    </div>
+    <div>
+      <mat-tab-group class="!h-full max-h-[300px]" mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Pgn">
+          @if (gameManagerService.moves().length > 0) {
+            <app-game-moves />
+          }
+        </mat-tab>
+        <mat-tab label="Games explorer">
+          <app-games-library />
+        </mat-tab>
+
+        <mat-tab label="Analysis">
+          <app-game-analysis />
+        </mat-tab>
+
+        <mat-tab label="Load Game">
+          <app-pgn-reader />
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <app-game-navigator />
+
+    <div [style.background]="colorWhite | cellColorPipe: 0.8">
+      <app-count-down [countDownColor]="colorWhite" />
+      <app-eaten-pieces [color]="colorWhite" />
+    </div>
   </div>
-  <div>
-    <mat-tab-group class="!h-full max-h-[300px]" mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="Pgn">
-        @if (gameManagerService.moves().length > 0) {
-        <app-game-moves />
-        }
-      </mat-tab>
-      <mat-tab label="Games explorer">
-        <app-games-library />
-      </mat-tab>
-
-      <mat-tab label="Analysis">
-        <app-game-analysis />
-      </mat-tab>
-
-      <mat-tab label="Load Game">
-        <app-pgn-reader />
-      </mat-tab>
-    </mat-tab-group>
-  </div>
-
-  <app-game-navigator />
-
-  <div [style.background]="colorWhite | cellColorPipe: 0.8">
-    <app-count-down [countDownColor]="colorWhite" />
-    <app-eaten-pieces [color]="colorWhite" />
-  </div>
-</div>
 }
 
 <ng-template #countdownTpl let-data>

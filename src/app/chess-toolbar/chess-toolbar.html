@@ -1,104 +1,135 @@
-<div class="grid md:grid-cols-3 bg-gray-100 gap-3  p-2 rounded-lg shadow-sm m-auto" role="toolbar"
-    aria-label="Chess game toolbar">
+<div class="grid xl:grid-cols-3 bg-gray-100 gap-3 p-2 rounded-lg shadow-sm m-auto" role="toolbar">
+  <div class="grid grid-cols-4 xl:flex xl:items-center gap-2 w-full xl:w-auto">
+    <button
+      class="flex items-center gap-1 px-3 py-1.5 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded-md transition"
+      (click)="emitToggleResetGame(true)"
+      title="New game (N)"
+    >
+      <span class="m-auto">
+        <mat-icon fontIcon="refresh m-auto"></mat-icon>
+      </span>
+      @if (!breakpointService.isMobile() && !breakpointService.isTablet()) {
+        <span>New</span>
+      }
+    </button>
 
-    <div class="grid grid-cols-4 md:flex md:items-center gap-2 w-full md:w-auto">
+    <button
+      class="p-2 rounded-md hover:bg-gray-200 disabled:opacity-40"
+      (click)="gameManagerService.prevMove()"
+      [disabled]="gameManagerService.currentMoveIndex() <= 0"
+      title="Undo"
+    >
+      <mat-icon fontIcon="undo"></mat-icon>
+    </button>
+
+    <button
+      class="p-2 rounded-md hover:bg-gray-200 disabled:opacity-40"
+      (click)="gameManagerService.nextMove()"
+      [disabled]="gameManagerService.currentMoveIndex() >= gameManagerService.moves().length"
+      title="Redo"
+    >
+      <mat-icon fontIcon="redo"></mat-icon>
+    </button>
+
+    <button
+      class="p-2 rounded-md hover:bg-gray-200 justify-end flex"
+      (click)="flipBoard()"
+      matTooltip="Flip board"
+    >
+      <mat-icon fontIcon="swap_horiz"></mat-icon>
+    </button>
+  </div>
+
+  <div
+    [style.backgroundColor]="'b' | cellColorPipe: 0.7"
+    [style.color]="'w' | cellColorPipe"
+    class="w-full xl:w-[450px] text-center bg-white p-3 rounded"
+    (click)="showOpeningDetails()"
+  >
+    @if (currentOpening()) {
+      <span class="cursor-pointer text-[12px]">
+        {{ currentOpening()?.eco }} - {{ currentOpening()?.name }}</span
+      >
+    }
+  </div>
+
+  <div class="grid grid-cols-[25%_25%_50%] gap-2">
+    @for (color of ['w', 'b']; track $index) {
+      <div
+        [style.backgroundColor]="
+          color == 'w' ? chessboardService.whitePieceColor() : chessboardService.blackPieceColor()
+        "
+        [style.color]="
+          color == 'w' ? chessboardService.blackPieceColor() : chessboardService.whitePieceColor()
+        "
+        class="relative rounded border-[1px] border-black text-center text-[10px] flex items-center justify-center cursor-pointer"
+      >
+        @if (color == gameManagerService.currentTurn()) {
+          {{ color == 'w' ? 'White' : 'Black' }} <br />turn
+        }
+        <div class="text-green-600 absolute top-0 left-0 p-1">
+          <button
+            mat-icon-button
+            (click)="toggleEnablePcPlayer(color); $event.stopPropagation()"
+            class="w-full"
+            [class.!text-gray-300]="
+              color == 'w'
+                ? !gameManagerService.whitePcPlayerEnabled()
+                : !gameManagerService.blackPcPlayerEnabled()
+            "
+          >
+            <mat-icon fontIcon="computer" class="text-[20px] !overflow-visible"></mat-icon>
+          </button>
+        </div>
+      </div>
+    }
+
+    <div class="flex items-center gap-2 justify-end">
+      <div class="relative grid grid-cols-2">
         <button
-            class="flex items-center gap-1 px-3 py-1.5 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded-md transition"
-            (click)="emitToggleResetGame(true)" title="New game (N)">
-            <span class="m-auto">
-                <mat-icon fontIcon="refresh m-auto"></mat-icon>
-            </span>
-            @if(!breakpointService.isMobile()){
-            <span>New</span>
-            }
+          class="p-2 rounded-md hover:bg-gray-200"
+          (click)="openOptions()"
+          matTooltip="Options"
+        >
+          <mat-icon fontIcon="settings"></mat-icon>
+        </button>
+        <button
+          class="p-2 rounded-md hover:bg-gray-200"
+          (click)="moreOpen = !moreOpen"
+          title="More"
+        >
+          <mat-icon fontIcon="more_vert"></mat-icon>
         </button>
 
+        @if (moreOpen) {
+          <div class="absolute right-2 mt-12 w-40 shadow-lg z-10">
+            <input
+              type="text"
+              class="menu-voice p-0 m-0 h-8 w-full border-0 bg-white"
+              placeholder="Api key"
+              (input)="setApiKey($event)"
+            />
+            <button class="menu-voice" (click)="emitHint()">Hint</button>
+            <button class="menu-voice" (click)="emitRequestDraw()">Offer Draw</button>
+            <button class="menu-voice" (click)="emitResign()">Resign</button>
 
-        <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-40"
-            (click)="gameManagerService.prevMove()" [disabled]="gameManagerService.currentMoveIndex() <= 0"
-            title="Undo (Z)">
-            <mat-icon fontIcon="undo"></mat-icon>
-        </button>
+            <button
+              class="menu-voice flex items-center gap-1"
+              (click)="exportFen()"
+              title="Export FEN"
+            >
+              <mat-icon fontIcon="file_upload"></mat-icon>
+              Export FEN
+            </button>
 
-
-        <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-40"
-            (click)="gameManagerService.nextMove()"
-            [disabled]="gameManagerService.currentMoveIndex() >= gameManagerService.moves().length" title="Redo (Y)">
-            <mat-icon fontIcon="redo"></mat-icon>
-        </button>
-
-
-        <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 justify-end flex" (click)="flipBoard()"
-            title="Flip board (F)">
-            <mat-icon fontIcon="swap_horiz"></mat-icon>
-        </button>
-
-        <button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 justify-end flex" (click)="openOptions()"
-            title="Options">
-            <mat-icon fontIcon="settings"></mat-icon>
-        </button>
-    </div>
-
-    <div [style.backgroundColor]="'b' | cellColorPipe : 0.7" [style.color]="'w' | cellColorPipe"
-        class="w-full md:w-[450px] text-center bg-white p-3 rounded  " (click)="showOpeningDetails()">
-        @if(currentOpening()){
-        <span class="cursor-pointer text-[12px]">
-            {{currentOpening()?.eco}} -
-            {{currentOpening()?.name}}</span>
-        }
-    </div>
-
-    <div class="grid grid-cols-[25%_25%_50%] gap-2">
-        @for( color of ['w', 'b']; track $index) {
-        <div (click)="openColorChooser(color)"
-            [style.backgroundColor]="color == 'w'  ? chessboardService.whitePieceColor() : chessboardService.blackPieceColor()"
-            [style.color]="color == 'w' ? chessboardService.blackPieceColor() : chessboardService.whitePieceColor()"
-            class="relative rounded border-[1px] border-black  text-center text-[10px] flex items-center justify-center cursor-pointer">
-            @if(color == gameManagerService.currentTurn()) {
-            {{color == 'w' ? 'White' : 'Black'}} <br>turn
-            }
-            <div class="text-green-600 absolute top-0 left-0 p-1">
-                <button mat-icon-button (click)="toggleEnablePcPlayer(color);$event.stopPropagation()" class="w-full"
-                    [class.!text-gray-300]="color == 'w' ? !gameManagerService.whitePcPlayerEnabled() : !gameManagerService.blackPcPlayerEnabled()">
-                    <mat-icon fontIcon="computer" class="text-[20px] !overflow-visible "></mat-icon>
-                </button>
+            <div class="flex items-center gap-1">
+              <button class="menu-voice flex items-center gap-1" (click)="emitImportFen('test')">
+                <mat-icon fontIcon="file_download"></mat-icon>Import FEN
+              </button>
             </div>
-        </div>
+          </div>
         }
-
-
-
-        <div class="flex items-center gap-2 justify-end">
-            <div class="relative">
-                <button class="p-2 rounded-md hover:bg-gray-200" (click)="toggleMore()" aria-haspopup="true"
-                    aria-expanded="moreOpen()" title="More">
-                    <mat-icon fontIcon="more_vert"></mat-icon>
-                </button>
-
-                @if(moreOpen) {
-                <div class="absolute right-0 mt-2 w-40 shadow-lg z-10">
-                    <input type="text" class="menu-voice p-0 m-0 h-8 w-full border-0 bg-white" placeholder="Api key"
-                        (input)="setApiKey($event)" />
-                    <button class="menu-voice" (click)="emitHint()">Hint</button>
-                    <button class="menu-voice" (click)="emitRequestDraw()">Offer Draw</button>
-                    <button class="menu-voice" (click)="emitResign()">Resign</button>
-
-                    <button class="menu-voice flex items-center gap-1" (click)="exportFen()" title="Export FEN">
-                        <mat-icon fontIcon="file_upload"></mat-icon>
-                        Export FEN
-                    </button>
-
-
-                    <div class="flex items-center gap-1">
-                        <button class="menu-voice flex items-center gap-1" (click)="emitImportFen('test')">
-                            <mat-icon fontIcon="file_download"></mat-icon>Import FEN</button>
-                    </div>
-                </div>
-                }
-            </div>
-        </div>
+      </div>
     </div>
-
-
-
+  </div>
 </div>

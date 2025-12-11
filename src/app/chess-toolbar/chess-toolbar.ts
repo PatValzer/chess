@@ -1,4 +1,13 @@
-import { Component, computed, effect, inject, input, output, signal, untracked } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+  untracked,
+} from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,108 +20,89 @@ import { OpeningService } from '../services/opening-service';
 import { PopupDialogService } from '../services/popup-dialog-service';
 import { OpeningDetailsDialog } from '../opening-tree/opening-details-dialog/opening-details-dialog';
 import { OpenAIService } from '../services/openai.service';
-import { CellColorPipe } from "../pipes/piece-color-pipe";
+import { CellColorPipe } from '../pipes/piece-color-pipe';
 import { Piece } from 'chess.js';
 import { BreakpointService } from '../services/breakpoint-service';
 import { COLORS } from '../chessboard/COLORS';
 
-import { OptionsComponent } from '../shared/options/options';
+import { OptionsComponent } from './options/options';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-chess-toolbar',
-  imports: [MatToolbarModule, MatIconModule, MatSlideToggleModule, MatFormFieldModule, MatMenuModule, CellColorPipe, MatDialogModule],
+  imports: [
+    MatToolbarModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    CellColorPipe,
+    MatDialogModule,
+    MatTooltipModule,
+  ],
   templateUrl: './chess-toolbar.html',
   styleUrl: './chess-toolbar.scss',
 })
 export class ChessToolbar {
-
-  openAiService = inject(OpenAIService)
-  openingService = inject(OpeningService)
-  gameManagerService = inject(GameManagerService)
-  chessboardService = inject(ChessboardService)
-  popupDialogService = inject(PopupDialogService)
-  breakpointService = inject(BreakpointService)
-  dialog = inject(MatDialog)
+  openAiService = inject(OpenAIService);
+  openingService = inject(OpeningService);
+  gameManagerService = inject(GameManagerService);
+  chessboardService = inject(ChessboardService);
+  popupDialogService = inject(PopupDialogService);
+  breakpointService = inject(BreakpointService);
+  dialog = inject(MatDialog);
 
   openOptions() {
-    this.dialog.open(OptionsComponent)
+    this.dialog.open(OptionsComponent);
   }
 
-  chess = computed(
-    () => {
-      return this.gameManagerService.chess
-    }
-  )
+  chess = computed(() => {
+    return this.gameManagerService.chess;
+  });
 
-  currentOpening = computed(
-    () => this.openingService.currentOpening()
-  )
+  currentOpening = computed(this.openingService.currentOpening);
 
   setApiKey($event: Event) {
     const inputElement = $event.target as HTMLInputElement;
     const apiKey = inputElement.value;
-    this.openAiService.apiKey.set(apiKey)
+    this.openAiService.apiKey.set(apiKey);
   }
 
   showOpeningDetails() {
     const data = {
       opening: this.currentOpening(),
-      title: this.currentOpening()?.name + " details"
-    }
+      title: this.currentOpening()?.name + ' details',
+    };
     this.popupDialogService.startDialog(
-      OpeningDetailsDialog, data,
+      OpeningDetailsDialog,
+      data,
       (loadOpeningInChessBoard: boolean) => {
         if (loadOpeningInChessBoard) {
-          this.gameManagerService.reset()
-          this.currentOpening()?.moves.forEach(
-            (move) => {
-              this.gameManagerService.move(move)
-            }
-          )
+          this.gameManagerService.reset();
+          this.currentOpening()?.moves.forEach((move) => {
+            this.gameManagerService.move(move);
+          });
         }
-      })
-
-  }
-
-
-  openColorChooser(colorSelected: string) {
-
-    const data = {
-      currentColor: colorSelected,
-      title: "Choose " + (colorSelected == "w" ? 'white' : 'black') + " piece color"
-    }
-    this.popupDialogService.startDialog<ColorPickerDialogComponent, string>(
-      ColorPickerDialogComponent,
-      data,
-      (color) => {
-        this.chessboardService.setPiecesColor(colorSelected as COLORS, color)
-      }
-    )
+      },
+    );
   }
 
   exportFen() {
-    const fen = this.gameManagerService.chess.fen()
-    alert(fen)
+    const fen = this.gameManagerService.chess.fen();
+    alert(fen);
   }
 
   toggleEnablePcPlayer(color: string) {
-    color == "w" ?
-      this.gameManagerService.whitePcPlayerEnabled.set(!this.gameManagerService.whitePcPlayerEnabled()) :
-      this.gameManagerService.blackPcPlayerEnabled.set(!this.gameManagerService.blackPcPlayerEnabled())
+    color == 'w'
+      ? this.gameManagerService.whitePcPlayerEnabled.set(
+          !this.gameManagerService.whitePcPlayerEnabled(),
+        )
+      : this.gameManagerService.blackPcPlayerEnabled.set(
+          !this.gameManagerService.blackPcPlayerEnabled(),
+        );
   }
 
-  canUndo = input(false);
-  canRedo = input(false);
-  isClockVisible = input(true);
-  showMoveList = input(true);
-  isPlaying = input(false);
-
-
-
-  newGame = output<void>();
-  undo = output<void>();
-  redo = output<void>();
   importFen = output<string>();
   toggleMoveList = output<boolean>();
   resetGame = output<boolean>();
@@ -124,14 +114,26 @@ export class ChessToolbar {
   moreOpen = false;
 
   // Methods to trigger outputs
-  flipBoard() { this.chessboardService.flipBoard(); }
+  flipBoard() {
+    this.chessboardService.flipBoard();
+  }
 
-  emitImportFen(fen: string) { if (fen) this.importFen.emit(fen.trim()); }
-  emitToggleMoveList(show: boolean) { this.toggleMoveList.emit(show); }
-  emitToggleResetGame(visible: boolean) { this.resetGame.emit(visible); }
-  emitHint() { this.hint.emit(); }
-  emitRequestDraw() { this.requestDraw.emit(); }
-  emitResign() { this.resign.emit(); }
-
-  toggleMore() { this.moreOpen = !this.moreOpen; }
+  emitImportFen(fen: string) {
+    if (fen) this.importFen.emit(fen.trim());
+  }
+  emitToggleMoveList(show: boolean) {
+    this.toggleMoveList.emit(show);
+  }
+  emitToggleResetGame(visible: boolean) {
+    this.resetGame.emit(visible);
+  }
+  emitHint() {
+    this.hint.emit();
+  }
+  emitRequestDraw() {
+    this.requestDraw.emit();
+  }
+  emitResign() {
+    this.resign.emit();
+  }
 }

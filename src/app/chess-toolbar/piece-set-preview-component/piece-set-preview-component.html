@@ -1,0 +1,7 @@
+{{ pieceSet() }}
+
+<div class="grid grid-cols-6 max-w-full">
+  @for (piece of pieces(); track $index) {
+    <img [src]="`assets/pieces/${pieceSet()}/${piece}`" />
+  }
+</div>

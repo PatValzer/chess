@@ -1,5 +1,9 @@
-<div class="piece w-full aspect-square  text-center flex items-center justify-center  cursor-pointer overflow-hidden" [class.selectedPiece]="selected()"
-    [style.color]="piece().pieceColor | pieceColorPipe">
-    {{piece().pieceSymbol | pieceTypePipe}} </div>
+<div
+  class="piece w-full aspect-square text-center flex items-center justify-center cursor-pointer overflow-hidden"
+  [class.selectedPiece]="selected()"
+  [style.color]="piece().pieceColor | pieceColorPipe"
+>
+  <img [src]="piece() | pieceImageUrl" class="max-w-full max-h-full" />
+</div>
 
 <!-- [style.fontSize]="this.selected() ? '100px' : '75px'" -->

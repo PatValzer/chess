@@ -32,13 +32,16 @@
               },
               {
                 "glob": "**/*",
+                "input": "src/assets/pieces",
+                "output": "assets/pieces"
+              },
+              {
+                "glob": "**/*",
                 "input": "src/assets/openings",
                 "output": "assets/openings"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "outputPath": "dist/chess"
           },
           "configurations": {
@@ -97,9 +100,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           }
         },
         "deploy": {
