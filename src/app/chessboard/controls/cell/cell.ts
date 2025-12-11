@@ -105,7 +105,6 @@ export class CellComponent {
     this.chessboardService.selectedSquare.update((s) => $event.source.data);
     const el = $event.source.element.nativeElement as HTMLElement;
     this.previewSize = el.clientWidth;
-    console.log('Drag started, preview size:', this.previewSize);
   }
 
   cellClick($event: PointerEvent) {

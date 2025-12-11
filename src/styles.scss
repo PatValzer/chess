@@ -37,52 +37,52 @@ body {
 
 }
 
-/* Global Dialog Overrides */
-.mat-mdc-dialog-container {
-    --mdc-dialog-container-shape: 20px !important;
-    --mdc-dialog-container-color: white !important;
-}
+// /* Global Dialog Overrides */
+// .mat-mdc-dialog-container {
+//     --mdc-dialog-container-shape: 20px !important;
+//     --mdc-dialog-container-color: white !important;
+// }
 
-.mat-mdc-dialog-surface {
-    border-radius: var(--mdc-dialog-container-shape) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
-}
+// .mat-mdc-dialog-surface {
+//     border-radius: var(--mdc-dialog-container-shape) !important;
+//     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+// }
 
-.mat-mdc-dialog-title {
-    font-family: Roboto, sans-serif !important; /* Fallback to standard Roboto */
-    font-size: 1.25rem !important; /* Slightly smaller, more elegant */
-    font-weight: 500 !important;
-    text-align: center; /* Center the title */
+// .mat-mdc-dialog-title {
+//     font-family: Roboto, sans-serif !important; /* Fallback to standard Roboto */
+//     font-size: 1.25rem !important; /* Slightly smaller, more elegant */
+//     font-weight: 500 !important;
+//     text-align: center; /* Center the title */
     
-    background-color: #f7f7f7 !important; /* Soft gray background */
+//     background-color: #f7f7f7 !important; /* Soft gray background */
     
-    padding: 20px 24px 20px 24px !important; /* More vertical padding */
-    border-bottom: 1px solid #f0f0f0 !important; /* Subtle separator */
-    margin-bottom: 20px !important;
-    letter-spacing: 0.025em;
-    color: #333;
+//     padding: 20px 24px 20px 24px !important; /* More vertical padding */
+//     border-bottom: 1px solid #f0f0f0 !important; /* Subtle separator */
+//     margin-bottom: 20px !important;
+//     letter-spacing: 0.025em;
+//     color: #333;
     
-    /* Ensure background clips to top rounded corners */
-    border-top-left-radius: 20px !important; 
-    border-top-right-radius: 20px !important;
-}
+//     /* Ensure background clips to top rounded corners */
+//     border-top-left-radius: 20px !important; 
+//     border-top-right-radius: 20px !important;
+// }
 
-.mat-mdc-dialog-content {
-    padding: 0 24px 24px 24px !important;
-    font-size: 1rem;
-    line-height: 1.5;
-}
+// .mat-mdc-dialog-content {
+//     padding: 0 24px 24px 24px !important;
+//     font-size: 1rem;
+//     line-height: 1.5;
+// }
 
-.mat-mdc-dialog-actions {
-    padding: 16px 24px !important;
-    border-top: 1px solid #eee;
-    gap: 10px;
-}
+// .mat-mdc-dialog-actions {
+//     padding: 16px 24px !important;
+//     border-top: 1px solid #eee;
+//     gap: 10px;
+// }
 
-/* Button overrides inside dialogs for consistency */
-.mat-mdc-dialog-actions button {
-    border-radius: 8px !important;
-    text-transform: uppercase;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
+// /* Button overrides inside dialogs for consistency */
+// .mat-mdc-dialog-actions button {
+//     border-radius: 8px !important;
+//     text-transform: uppercase;
+//     font-weight: 500;
+//     letter-spacing: 0.5px;
+// }
