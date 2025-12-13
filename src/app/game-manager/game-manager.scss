@@ -1,51 +1,49 @@
-    @use '@angular/material' as mat;
+@use '@angular/material' as mat;
+@use 'tailwindcss';
 
-    @include mat.tabs-overrides((active-focus-indicator-color: orange,
-            active-focus-label-text-color: red,
-        ));
+@include mat.tabs-overrides(
+  (
+    active-focus-indicator-color: orange,
+    active-focus-label-text-color: red,
+  )
+);
 
+:host {
+  ::ng-deep .mat-mdc-tab-body-wrapper {
+    @apply h-full;
+  }
 
-    :host {
-        ::ng-deep .mat-mdc-tab-body-wrapper {
-            @apply h-full;
-        }
+  /* Tabs container */
+  ::ng-deep .mat-mdc-tab-labels {
+    @apply border-b border-gray-200;
+  }
 
-        /* Tabs container */
-        ::ng-deep .mat-mdc-tab-labels {
-            @apply border-b border-gray-200;
-        }
+  /* Each tab */
+  ::ng-deep .mdc-tab__text-label {
+    @apply px-3 py-1 !text-[12px] text-gray-400;
+    @apply transition-colors duration-200;
+    @apply hover:text-gray-900;
+  }
 
-        /* Each tab */
-        ::ng-deep .mdc-tab__text-label {
-            @apply px-3 py-1 !text-[12px] text-gray-400;
-            @apply transition-colors duration-200;
-            @apply hover:text-gray-900;
-
-        }
-
-        /* Active tab */
-        ::ng-deep .mat-mdc-tab-labels .mdc-tab--active {
-            .mdc-tab__text-label {
-                @apply font-semibold text-black;
-
-            }
-        }
-
-
-        /* Ripple (light green subtle) */
-        ::ng-deep .mat-mdc-tab-ripple .mdc-ripple-surface {
-            @apply bg-green-300/20;
-        }
-
-        --test: #000;
-
-        ::ng-deep .mat-mdc-tab .mdc-tab-indicator__content--underline {
-            @apply border-red-600;
-
-        }
+  /* Active tab */
+  ::ng-deep .mat-mdc-tab-labels .mdc-tab--active {
+    .mdc-tab__text-label {
+      @apply font-semibold text-black;
     }
+  }
 
+  /* Ripple (light green subtle) */
+  ::ng-deep .mat-mdc-tab-ripple .mdc-ripple-surface {
+    @apply bg-green-300/20;
+  }
 
-    .countdown {
-        @apply text-right md:w-[406px];
-    }
+  --test: #000;
+
+  ::ng-deep .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    @apply border-red-600;
+  }
+}
+
+.countdown {
+  @apply text-right md:w-[406px];
+}

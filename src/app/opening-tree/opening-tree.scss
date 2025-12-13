@@ -1,10 +1,10 @@
-:host ::ng-deep .mat-mdc-button-touch-target{
-    
-    @apply size-[25px] !important
+@use 'tailwindcss';
+:host ::ng-deep .mat-mdc-button-touch-target {
+  @apply size-[25px];
 }
 
-.selectedOpening{
-    // color: red;
-    font-weight: bold;
-    background-color:rgb(0 0 0 / 3%)
+.selectedOpening {
+  // color: red;
+  font-weight: bold;
+  background-color: rgb(0 0 0 / 3%);
 }

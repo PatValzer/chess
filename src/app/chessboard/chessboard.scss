@@ -1,20 +1,18 @@
-
-
+@use 'tailwindcss';
 :host ::ng-deep .chessBoard {
-    grid-template-columns: 4% 12% 12% 12% 12% 12% 12% 12% 12%;
-    @apply  w-[100%];
+  grid-template-columns: 4% 12% 12% 12% 12% 12% 12% 12% 12%;
+  @apply w-[100%];
 
-    .cell {
-       
-
-        .piece {
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            font-family: ChessMeridaUnicode;
-        }
-
-
+  .cell {
+    .piece {
+      text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+      font-family: ChessMeridaUnicode;
     }
-
+  }
 }
 
 // :host ::ng-deep .chessBoard-small {

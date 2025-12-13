@@ -8,7 +8,7 @@ import { PieceService } from '../../../services/piece-service';
 
 @Component({
   selector: 'app-piece',
-  imports: [PieceTypePipe, PieceColorPipe, PieceImageUrlPipe],
+  imports: [PieceColorPipe, PieceImageUrlPipe],
   templateUrl: './piece.html',
   styleUrl: './piece.scss',
 })
